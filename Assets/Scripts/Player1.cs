@@ -4,22 +4,14 @@ using UnityEngine;
 public class Player1 : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
-
-    [SerializeField] private Animator animator;
-
-    [SerializeField] private Sprite aliveSprite;
-
-    [SerializeField] private Sprite deathSprite;
-
-    [SerializeField] private SpriteRenderer spriteRenderer;
-
-    [SerializeField] public bool isInvicible;
-
-    [SerializeField] private GameObject[] currentHealthUI;
-
-    [SerializeField] private GameObject currentPercentageUI;
-
     [SerializeField] private Transform playerSpawn;
+    [SerializeField] private Sprite aliveSprite;
+    [SerializeField] private Sprite deathSprite;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject[] currentHealthUI;
+    [SerializeField] private GameObject currentPercentageUI;
+    [SerializeField] public bool isInvicible;
 
     public int maxHealth = 3;
     public int currentHealth;
@@ -96,6 +88,8 @@ public class Player1 : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, i / 2);
             yield return null;
         }
+
+        spriteRenderer.color = new Color(1, 1, 1, 1);
 
         spriteRenderer.sprite = aliveSprite;
 

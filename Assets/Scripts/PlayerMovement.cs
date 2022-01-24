@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 300;
-    public float jumpHeight = 10;
-    public int maxJumps = 2;
+    [SerializeField] private float moveSpeed = 300;
+    [SerializeField] private float jumpHeight = 10;
+    [SerializeField] private int maxJumps = 1;
+
+    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private LayerMask collisionLayer;
+    [SerializeField] private Rigidbody2D ridigBody;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private int jumpCount;
-
     private bool isGrounded;
     private bool isFastFalling;
     private bool isDesactivated;
-
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask collisionLayers;
-
-    public Rigidbody2D rb;
-    public SpriteRenderer spriteRenderer;
 
     void Update()
     {
@@ -32,12 +29,12 @@ public class PlayerMovement : MonoBehaviour
 
         MovePlayer(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime);
 
-        Flip(rb.velocity.x);
+        Flip(ridigBody.velocity.x);
     }
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
+        isGrounded = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
 
         if (isGrounded)
         {
@@ -48,12 +45,12 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer(float _horizontalMovement)
     {
-        rb.velocity = new Vector2(_horizontalMovement, rb.velocity.y);
+        ridigBody.velocity = new Vector2(_horizontalMovement, ridigBody.velocity.y);
     }
 
     void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        ridigBody.velocity = new Vector2(ridigBody.velocity.x, jumpHeight);
         --jumpCount;
         isFastFalling = false;
     }
@@ -62,14 +59,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded && !isFastFalling)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -jumpHeight);
+            ridigBody.velocity = new Vector2(ridigBody.velocity.x, -jumpHeight);
             isFastFalling = true;
         }
     }
 
     public void SetDesactivateState(bool state)
     {
-        rb.velocity = new Vector2(0, 0);
+        ridigBody.velocity = new Vector2(0, 0);
         isDesactivated = state;
     }
 
@@ -84,10 +81,4 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
-    //}
 }
