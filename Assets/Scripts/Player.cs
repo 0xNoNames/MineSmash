@@ -6,8 +6,13 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private Animator animator;
+
     [SerializeField] private GameObject[] currentHealthUI;
     [SerializeField] private GameObject currentPercentageUI;
+
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip[] clips;
+
     [SerializeField] public bool isInvicible;
 
     public int maxHealth = 3;
@@ -39,11 +44,13 @@ public class Player : MonoBehaviour
         if (isInvicible)
             return;
 
+        source.PlayOneShot(clips[Random.Range(0, clips.Length)], 0.25f);
+
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
 
         StopCoroutine("DamagedStun");
-        StartCoroutine(DamagedStun(currentPercentage/500));
+        StartCoroutine(DamagedStun(currentPercentage / 500));
 
         // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
 

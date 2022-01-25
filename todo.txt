@@ -1,18 +1,21 @@
-- Pas continuer d'avancer sur les walls
-- Tirer fleche du coup vitesse/puissance selon press mais pas angle
+- Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge)
 - UIManager (methodes pour modifier les elements)
 - Dash dans direction (invincible mais faut être grounded pour redash)
 
 - GameManager (spawns, lancement partie, fin partie)
 
-- Pouvoir s'accrocher aux rebords ( collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
+- Pouvoir s'accrocher aux rebords (collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
 - Rebondir contre les murs en cas de hit
 - Walljumps
 - Améliorer les box colliders du perso
 
-- Ajout des ombres ?
+- Animation sortie d'écran ?
+- Ajout des ombres / Glow / Flèche enflammée quand full charge
 - Passer en 2.5D ?
+- Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
 
 - Système de headshot (*10 la puissance ?)
 
 - Debug le hasFell qui passe dans la boucle lors du saut
+
+MULTIPLAYER
