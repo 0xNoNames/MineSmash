@@ -108,11 +108,9 @@ public class Player : MonoBehaviour
         animator.SetBool("isDead", true);
         isInvicible = true;
 
-        yield return new WaitForSeconds(0.1f);
-
         transform.position = playerSpawn.position;
 
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(1f);
 
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);

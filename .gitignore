@@ -1,3 +1,7 @@
 Library/
 Logs/
 obj/
+Assembly-CSharp.csproj
+MineSmash.sln
+Temp/
+UserSettings/
