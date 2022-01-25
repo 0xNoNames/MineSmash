@@ -1,4 +1,5 @@
-- Quand hit -> rouge + animation sautante -> invincible pendant 0.2 secondes.
+- Quand hit -> animation rouge -> invincible pendant 0.2 secondes 
+puis impossible de sauter/fastfall pendant x secondes selon les pourcentages.
 
 - Tirer fleche du coup vitesse/puissance selon press mais pas angle
 - UIManager (methodes pour modifier les elements)

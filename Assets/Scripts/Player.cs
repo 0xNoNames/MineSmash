@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
     public void Death()
     {
         HealthDown();
-        StopCoroutine("Respawn");
-        StartCoroutine("Respawn");
+        StopCoroutine("RespawnAnimation");
+        StartCoroutine("RespawnAnimation");
     }
 
     public void Hit(float damage)
@@ -39,9 +39,11 @@ public class Player : MonoBehaviour
         if (isInvicible)
             return;
 
-        isInvicible = true;
+        StopCoroutine("DamagedAnimation");
+        StartCoroutine("DamagedAnimation");
 
-        animator.SetBool("isDamaged", true);
+        // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
+
 
         if (currentPercentage < 999.9f)
         {
@@ -73,7 +75,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Respawn()
+    IEnumerator DamagedAnimation()
+    {
+        isInvicible = true;
+        animator.SetBool("isDamaged", true);
+        yield return new WaitForSeconds(0.25f);
+        isInvicible = false;
+        animator.SetBool("isDamaged", false);
+    }
+
+    IEnumerator RespawnAnimation()
     {
         playerMovement.SetDesactivateState(true);
         animator.SetBool("isInvincible", false);
