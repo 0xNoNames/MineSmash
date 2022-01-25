@@ -87,9 +87,9 @@ public class Player : MonoBehaviour
 
     IEnumerator DamagedStun(float seconds)
     {
-        playerMovement.SetDesactivateState(true);
+        playerMovement.SetDesactivateStateHit(true);
         yield return new WaitForSeconds(seconds);
-        playerMovement.SetDesactivateState(false);
+        playerMovement.SetDesactivateStateHit(false);
     }
 
     IEnumerator DamagedAnimation()
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
 
     IEnumerator RespawnAnimation()
     {
-        playerMovement.SetDesactivateState(true);
+        playerMovement.SetDesactivateStateDeath(true);
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
         isInvicible = true;
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
 
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
-        playerMovement.SetDesactivateState(false);
+        playerMovement.SetDesactivateStateDeath(false);
 
         yield return new WaitForSeconds(2.5f);
 

@@ -76,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
             ridigBody.velocity = new Vector2(_horizontalMovement, ridigBody.velocity.y);
         else
             ridigBody.velocity = new Vector2(0, ridigBody.velocity.y);
-
     }
     void Jump()
     {
@@ -94,11 +93,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void SetDesactivateState(bool state)
+    public void SetDesactivateStateDeath(bool state)
     {
-        //ridigBody.velocity = new Vector2(0, 0);
+        ridigBody.velocity = new Vector2(0, 0);
         isDesactivated = state;
     }
+
+    public void SetDesactivateStateHit(bool state)
+    {
+        isDesactivated = state;
+    }
+
 
     void Flip(float _velocity)
     {
