@@ -1,0 +1,16 @@
+- Quand hit -> rouge + animation sautante -> invincible pendant 0.2 secondes.
+
+- Tirer fleche du coup vitesse/puissance selon press mais pas angle
+- UIManager (methodes pour modifier les elements)
+- Pas continuer d'avancer sur les walls
+- Dash dans direction (invincible mais faut être grounded pour redash)
+
+- GameManager (spawns, lancement partie, fin partie)
+
+- Pouvoir s'accrocher aux rebords
+- Walljumps
+
+- Ajout des ombres ?
+- Passer en 2.5D ?
+
+- Debug le hasFell qui passe dans la boucle lors du saut

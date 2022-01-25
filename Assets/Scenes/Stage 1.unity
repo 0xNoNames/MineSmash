@@ -312,26 +312,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 105082346}
-  - component: {fileID: 105082345}
   m_Layer: 0
-  m_Name: Player1Spawn
+  m_Name: PlayerSpawn1
   m_TagString: Player1Spawn
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &105082345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105082344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c085662534a7f034bac83b10bb242f03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &105082346
 Transform:
   m_ObjectHideFlags: 0
@@ -3359,6 +3346,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886250594}
   m_CullTransparentMesh: 1
+--- !u!1 &1935293864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1935293866}
+  - component: {fileID: 1935293865}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1935293865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3eab39db5ed344e855f3752c8e5a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1935293866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.68100184, y: 0.53352785, z: -52.68521}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991255687
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,8 +3647,8 @@ GameObject:
   - component: {fileID: 1993103562}
   - component: {fileID: 1993103563}
   m_Layer: 6
-  m_Name: Player1
-  m_TagString: Player1
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3682,7 +3712,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993103557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.77, y: 3.06, z: 0}
+  m_LocalPosition: {x: -1.22, y: 1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 99084432}
@@ -3704,7 +3734,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
@@ -3723,15 +3753,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 300
-  jumpHeight: 10
+  jumpHeight: 15
   maxJumps: 2
-  groundCheck: {fileID: 99084432}
-  groundCheckRadius: 0.3
-  collisionLayers:
+  boxCollider: {fileID: 1993103562}
+  collisionLayer:
     serializedVersion: 2
     m_Bits: 1
-  rb: {fileID: 1993103560}
+  ridigBody: {fileID: 1993103560}
   spriteRenderer: {fileID: 1993103558}
+  maxJumpTime: 0.1
 --- !u!61 &1993103562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3842,17 +3872,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1993103561}
+  playerSpawn: {fileID: 105082346}
   animator: {fileID: 1993103563}
-  aliveSprite: {fileID: 21300000, guid: e83ebef8a1a05684383613d8ae7237ef, type: 3}
-  deathSprite: {fileID: 21300000, guid: 8b4f6b3c7bf49a3469c86160f9958fb6, type: 3}
-  spriteRenderer: {fileID: 1993103558}
-  isInvicible: 0
   currentHealthUI:
   - {fileID: 195348734}
   - {fileID: 1764484276}
   - {fileID: 920187782}
   currentPercentageUI: {fileID: 765086127}
-  playerSpawn: {fileID: 105082346}
+  isInvicible: 0
   maxHealth: 3
   currentHealth: 0
   currentPercentage: 0
