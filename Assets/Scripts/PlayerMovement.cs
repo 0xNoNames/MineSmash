@@ -6,7 +6,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 15;
     [SerializeField] private int maxJumps = 2;
 
-    [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private BoxCollider2D headCollider;
+    [SerializeField] private BoxCollider2D armsCollider;
+    [SerializeField] private BoxCollider2D legsCollider;
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private Rigidbody2D ridigBody;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -16,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount;
 
     private bool isGrounded;
+    private bool isLeftBlocked;
+    private bool isRightBlocked;
     private bool isFastFalling;
     private bool isDesactivated;
     private bool hasFell;
@@ -47,7 +51,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
+        isGrounded = Physics2D.BoxCast(legsCollider.bounds.center, legsCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
+        isLeftBlocked = Physics2D.BoxCast(headCollider.bounds.center, headCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(armsCollider.bounds.center, armsCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(legsCollider.bounds.center, legsCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer);
+        isRightBlocked = Physics2D.BoxCast(headCollider.bounds.center, headCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer) || Physics2D.BoxCast(armsCollider.bounds.center, armsCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer) || Physics2D.BoxCast(legsCollider.bounds.center, legsCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer);
 
         if (!hasFell && !isGrounded && jumpCount == maxJumps)
         {
@@ -64,8 +70,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void MovePlayer(float _horizontalMovement) => ridigBody.velocity = new Vector2(_horizontalMovement, ridigBody.velocity.y);
+    void MovePlayer(float _horizontalMovement)
+    {
+        if (!isLeftBlocked && _horizontalMovement < 0 || !isRightBlocked && _horizontalMovement > 0)
+            ridigBody.velocity = new Vector2(_horizontalMovement, ridigBody.velocity.y);
+        else
+            ridigBody.velocity = new Vector2(0, ridigBody.velocity.y);
 
+    }
     void Jump()
     {
         jumpCount--;
@@ -84,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetDesactivateState(bool state)
     {
-        ridigBody.velocity = new Vector2(0, 0);
+        //ridigBody.velocity = new Vector2(0, 0);
         isDesactivated = state;
     }
 

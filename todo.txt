@@ -1,17 +1,18 @@
-- Quand hit -> animation rouge -> invincible pendant 0.2 secondes 
-puis impossible de sauter/fastfall pendant x secondes selon les pourcentages.
-
+- Pas continuer d'avancer sur les walls
 - Tirer fleche du coup vitesse/puissance selon press mais pas angle
 - UIManager (methodes pour modifier les elements)
-- Pas continuer d'avancer sur les walls
 - Dash dans direction (invincible mais faut être grounded pour redash)
 
 - GameManager (spawns, lancement partie, fin partie)
 
-- Pouvoir s'accrocher aux rebords
+- Pouvoir s'accrocher aux rebords ( collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
+- Rebondir contre les murs en cas de hit
 - Walljumps
+- Améliorer les box colliders du perso
 
 - Ajout des ombres ?
 - Passer en 2.5D ?
+
+- Système de headshot (*10 la puissance ?)
 
 - Debug le hasFell qui passe dans la boucle lors du saut

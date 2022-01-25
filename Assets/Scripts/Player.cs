@@ -42,6 +42,9 @@ public class Player : MonoBehaviour
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
 
+        StopCoroutine("DamagedStun");
+        StartCoroutine(DamagedStun(currentPercentage/500));
+
         // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
 
 
@@ -73,6 +76,13 @@ public class Player : MonoBehaviour
             else
                 currentHealthUI[i].SetActive(false);
         }
+    }
+
+    IEnumerator DamagedStun(float seconds)
+    {
+        playerMovement.SetDesactivateState(true);
+        yield return new WaitForSeconds(seconds);
+        playerMovement.SetDesactivateState(false);
     }
 
     IEnumerator DamagedAnimation()
