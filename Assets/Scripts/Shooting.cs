@@ -26,23 +26,24 @@ public class Shooting : MonoBehaviour
             bowAnimator.SetBool("isBending", true);
             if (fireCharge < 55f)
                 fireCharge += Time.deltaTime * 33.3f;
-            else
-                Debug.Log("Charge done");
         }
 
         if (Input.GetButtonUp("Fire1") && Time.time - lastFireTime > fireRate && !playerMovement.isDesactivated)
         {
             Shoot();
-            fireCharge = 5f;
             lastFireTime = Time.time;
+        }
+
+        if (Input.GetButtonUp("Fire1"))
+        {
+            fireCharge = 5f;
+            bowAnimator.SetBool("isBending", false);
         }
     }
 
     void Shoot()
     {
         source.PlayOneShot(shotClip, 0.25f);
-
-        bowAnimator.SetBool("isBending", false);
 
         GameObject arrow = Instantiate(arrowPrefab, bow.position, bow.rotation);
         Arrow arrowComponent = arrow.GetComponent<Arrow>();

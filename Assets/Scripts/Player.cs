@@ -56,7 +56,8 @@ public class Player : MonoBehaviour
 
         if (currentPercentage < 999.9f)
         {
-            currentPercentage += damage;
+            print(damage);
+            currentPercentage += damage * 0.37f;
             currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
             float delta = currentPercentage / 150;
             currentPercentageUI.GetComponent<UnityEngine.UI.Text>().color = new Color(1, 1 - delta, 1 - delta);

@@ -48,7 +48,7 @@ public class Arrow : MonoBehaviour
                 StopAndDestroy();
                 // Plante la flèche dans le joueur
                 transform.parent = hitInfo.transform;
-                touchedPlayer.Hit(15f);
+                touchedPlayer.Hit(shootingForce);
             }
         }
 

@@ -155,7 +155,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c337c5cee9a5b03429bc0558a5ee137d, type: 3}
   - {fileID: 8300000, guid: cd0c155713bd44144bf7f789b8d5156b, type: 3}
   selfDamage: 1
-  shootingForce: 20
 --- !u!82 &-6261270249377383022
 AudioSource:
   m_ObjectHideFlags: 0
