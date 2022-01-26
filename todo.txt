@@ -1,7 +1,7 @@
 - Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
 / coup critique ? Flèche enflammée quand full charge avec du glow
 
-ARC BANDE FLECHE QUAND RESTE APPUYED + 
+ARC BANDE FLECHE QUAND RESTE APPUYED
 
 - UIManager (methodes pour modifier les elements)
 - SoundManager
