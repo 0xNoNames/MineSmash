@@ -1,5 +1,10 @@
-- Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge)
+- Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
+/ coup critique ? Flèche enflammée quand full charge avec du glow
+
+ARC BANDE FLECHE QUAND RESTE APPUYED + 
+
 - UIManager (methodes pour modifier les elements)
+- SoundManager
 - Dash dans direction (invincible mais faut être grounded pour redash)
 
 - Améliorer les box colliders du perso
@@ -11,7 +16,7 @@
 - Walljumps
 
 - Animation sortie d'écran ?
-- Ajout des ombres / Glow / Flèche enflammée quand full charge
+- Ajout des ombres / Glow
 - Passer en 2.5D ?
 - Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
 
@@ -20,3 +25,5 @@
 - Debug le hasFell qui passe dans la boucle lors du saut
 
 MULTIPLAYER
+
+https://youtu.be/3sWTzMsmdx8?t=61
