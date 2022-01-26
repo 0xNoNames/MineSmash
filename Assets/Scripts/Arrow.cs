@@ -7,15 +7,18 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private BoxCollider2D coll;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private bool DEBUG;
 
-    [SerializeField] private float shootForce = 20f;
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip[] missClip;
+
+    [SerializeField] private bool selfDamage;
+
+    [SerializeField] private float shootingForce = 20f;
 
     private bool destroyed;
     private Player shootingPlayer;
 
-
-    private void Start() => body.AddForce(transform.up * shootForce, ForceMode2D.Impulse);
+    private void Start() => body.AddForce(transform.up * shootingForce, ForceMode2D.Impulse);
 
     private void FixedUpdate()
     {
@@ -28,26 +31,33 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Player")
+        // Si la flèche touche un environnement solide 
+        if (hitInfo.tag == "Solid")
+        {
+            source.PlayOneShot(missClip[Random.Range(0, missClip.Length)], 0.25f);
+            StopAndDestroy();
+        }
+
+        // Si la flèche touche un joueur
+        else if (hitInfo.tag == "Player")
         {
             Player touchedPlayer = hitInfo.GetComponent<Player>();
 
-            if (touchedPlayer != (shootingPlayer && !DEBUG))
+            if (touchedPlayer != (shootingPlayer && !selfDamage) && !touchedPlayer.isInvicible)
             {
+                StopAndDestroy();
+                // Plante la flèche dans le joueur
+                transform.parent = hitInfo.transform;
                 touchedPlayer.Hit(15f);
-                StopAndDestroyArrow();
-                transform.parent = hitInfo.transform; // Plante la flèche dans le joueur
             }
         }
-        else if (hitInfo.tag != "DeathZone" && hitInfo.tag != "Arrow")
-        {
-            StopAndDestroyArrow();
-        }
-        if (gameObject != null)
+
+        // Si la flèche sort de la zone de jeu
+        else if (hitInfo.tag == "DeathZone")
             GameObject.Destroy(gameObject, 10f);
     }
 
-    public void StopAndDestroyArrow()
+    public void StopAndDestroy()
     {
         destroyed = true;
         Object.Destroy(body);

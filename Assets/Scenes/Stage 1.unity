@@ -784,8 +784,8 @@ GameObject:
   - component: {fileID: 299702599}
   - component: {fileID: 299702598}
   m_Layer: 0
-  m_Name: Fondation
-  m_TagString: Untagged
+  m_Name: Solid
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3953,6 +3953,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 200921441}
   arrowPrefab: {fileID: 1629166650038820783, guid: 920cf045a1981714ba248cee251fd1d3, type: 3}
+  source: {fileID: 1993103567}
+  shotClip: {fileID: 8300000, guid: a506dc25bdefd744eb2f75e0609fb346, type: 3}
   player: {fileID: 1993103566}
   playerMovement: {fileID: 1993103561}
 --- !u!95 &1993103563
@@ -4047,9 +4049,12 @@ MonoBehaviour:
   - {fileID: 920187782}
   currentPercentageUI: {fileID: 765086127}
   source: {fileID: 1993103567}
-  clips:
-  - {fileID: 8300000, guid: c831b3eca013b6f4d9a870c270559294, type: 3}
-  - {fileID: 8300000, guid: d987266b40ac2d8459384a5dda3cbb84, type: 3}
+  hitClips:
+  - {fileID: 8300000, guid: 8a107cf1f365fd440b9e9a14967a021c, type: 3}
+  - {fileID: 8300000, guid: 96090003c54210c4c957371624e28b62, type: 3}
+  - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
+  - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
+  isInvicible: 0
   maxHealth: 3
   currentHealth: 0
   currentPercentage: 0

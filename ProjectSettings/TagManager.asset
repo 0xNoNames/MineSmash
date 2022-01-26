@@ -6,8 +6,8 @@ TagManager:
   tags:
   - Player1Spawn
   - Undefined
-  - Arrow
   - DeathZone
+  - Solid
   layers:
   - Default
   - TransparentFX

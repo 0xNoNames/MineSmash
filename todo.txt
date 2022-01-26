@@ -1,23 +1,18 @@
 - Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
 / coup critique ? Flèche enflammée quand full charge avec du glow
-
-
-- Pas de self damage sur les flèches (ajouter attribut player à la flèche)
-- Suppression de la flèche si elle ne touche rien
+- ARC BANDE FLECHE QUAND RESTE APPUYED
 
 - Ejection du joueur
-- Différentes couleurs selon le joueur 
+- Différents skin et flèches selon le joueur 
 BUG FLECHE TRAVERSE LE SOL
 
-ARC BANDE FLECHE QUAND RESTE APPUYED
+- Playsound avant ou après les autres appels de fonction ?
 
 - Animer double saut
 
 - UIManager (methodes pour modifier les elements)
 - SoundManager
 - Dash dans direction (invincible mais faut être grounded pour redash)
-
-- Améliorer les box colliders du perso
 
 - GameManager (spawns, lancement partie, fin partie)
 
@@ -26,7 +21,7 @@ ARC BANDE FLECHE QUAND RESTE APPUYED
 - Walljumps
 
 - Animation sortie d'écran ?
-- Ajout des ombres / Glow
+- Ajout des ombres / glow / particules
 - Passer en 2.5D ?
 - Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
 

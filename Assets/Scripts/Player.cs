@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject currentPercentageUI;
 
     [SerializeField] private AudioSource source;
-    [SerializeField] private AudioClip[] clips;
+    [SerializeField] private AudioClip[] hitClips;
 
-    private bool isInvicible;
+    public bool isInvicible;
 
     public int maxHealth = 3;
     public int currentHealth;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         if (isInvicible)
             return;
 
-        source.PlayOneShot(clips[Random.Range(0, clips.Length)], 0.25f);
+        source.PlayOneShot(hitClips[Random.Range(0, hitClips.Length)], 0.25f);
 
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");

@@ -7,11 +7,9 @@ public class Bow : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Camera cam;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Rigidbody2D playerRB;
 
-    private Rigidbody2D playerRB;
     private Vector2 mousePos;
-
-    private void Start() => playerRB = player.GetComponent<Rigidbody2D>();
 
     void Update() => mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
