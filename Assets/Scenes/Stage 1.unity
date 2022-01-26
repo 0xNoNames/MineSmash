@@ -682,6 +682,7 @@ GameObject:
   - component: {fileID: 200921441}
   - component: {fileID: 200921444}
   - component: {fileID: 200921442}
+  - component: {fileID: 200921443}
   m_Layer: 6
   m_Name: Bow
   m_TagString: Untagged
@@ -715,9 +716,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771bb178b3d83294bb38b3e10eda4a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1993103566}
   cam: {fileID: 519420031}
   sprite: {fileID: 200921444}
+  playerRB: {fileID: 1993103560}
+--- !u!95 &200921443
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200921440}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce4c707504001df42a6e108fdf8c8634, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &200921444
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2160,36 +2180,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920187782}
   m_CullTransparentMesh: 1
---- !u!1 &1241664842
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1241664843}
-  m_Layer: 0
-  m_Name: ArrowDestroyTriggers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1241664843
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241664842}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1390164791}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313434815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2262,7 +2252,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 118093338}
-  - {fileID: 1241664843}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3957,6 +3946,7 @@ MonoBehaviour:
   shotClip: {fileID: 8300000, guid: a506dc25bdefd744eb2f75e0609fb346, type: 3}
   player: {fileID: 1993103566}
   playerMovement: {fileID: 1993103561}
+  bowAnimator: {fileID: 0}
 --- !u!95 &1993103563
 Animator:
   serializedVersion: 3

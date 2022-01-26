@@ -13,8 +13,8 @@ public class Arrow : MonoBehaviour
 
     [SerializeField] private bool selfDamage;
 
-    [SerializeField] private float shootingForce = 20f;
 
+    private float shootingForce;
     private bool destroyed;
     private Player shootingPlayer;
 
@@ -66,4 +66,6 @@ public class Arrow : MonoBehaviour
     }
 
     public void SetShootingPlayer(Player _shootingPlayer) => this.shootingPlayer = _shootingPlayer;
+
+    public void SetShootingForce(float _shootingForce) => this.shootingForce = _shootingForce;
 }

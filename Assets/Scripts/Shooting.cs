@@ -11,17 +11,42 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private PlayerMovement playerMovement;
 
+    [SerializeField] private Animator bowAnimator;
+
+    private float lastFireTime = 0f;
+    private float fireRate = 0.5f;
+    private float fireCharge = 5f;
+
+    private void Start() => bowAnimator = bow.GetComponent<Animator>();
+
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !playerMovement.isDesactivated)
+        if (Input.GetButton("Fire1") && !playerMovement.isDesactivated)
+        {
+            bowAnimator.SetBool("isBending", true);
+            if (fireCharge < 55f)
+                fireCharge += Time.deltaTime * 33.3f;
+            else
+                Debug.Log("Charge done");
+        }
+
+        if (Input.GetButtonUp("Fire1") && Time.time - lastFireTime > fireRate && !playerMovement.isDesactivated)
+        {
             Shoot();
+            fireCharge = 5f;
+            lastFireTime = Time.time;
+        }
     }
 
     void Shoot()
     {
         source.PlayOneShot(shotClip, 0.25f);
 
+        bowAnimator.SetBool("isBending", false);
+
         GameObject arrow = Instantiate(arrowPrefab, bow.position, bow.rotation);
-        arrow.GetComponent<Arrow>().SetShootingPlayer(player);
+        Arrow arrowComponent = arrow.GetComponent<Arrow>();
+        arrowComponent.SetShootingPlayer(player);
+        arrowComponent.SetShootingForce(fireCharge);
     }
 }

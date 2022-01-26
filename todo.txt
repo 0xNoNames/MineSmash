@@ -19,6 +19,7 @@ BUG FLECHE TRAVERSE LE SOL
 - Pouvoir s'accrocher aux rebords (collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
 - Rebondir contre les murs en cas de hit
 - Walljumps
+- Ajouter friction pour les walljumps ?
 
 - Animation sortie d'écran ?
 - Ajout des ombres / glow / particules

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour
 {
-    [SerializeField] private Player player;
     [SerializeField] private Camera cam;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Rigidbody2D playerRB;
