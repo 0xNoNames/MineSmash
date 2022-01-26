@@ -7,9 +7,15 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private BoxCollider2D coll;
     [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private bool DEBUG;
+
+    [SerializeField] private float shootForce = 20f;
 
     private bool destroyed;
-    private Player player;
+    private Player shootingPlayer;
+
+
+    private void Start() => body.AddForce(transform.up * shootForce, ForceMode2D.Impulse);
 
     private void FixedUpdate()
     {
@@ -24,29 +30,30 @@ public class Arrow : MonoBehaviour
     {
         if (hitInfo.tag == "Player")
         {
-            player = hitInfo.GetComponent<Player>();
+            Player touchedPlayer = hitInfo.GetComponent<Player>();
 
-            Debug.Log(player);
-
-            if (player != null) //&& player != arrow.player)
+            if (touchedPlayer != (shootingPlayer && !DEBUG))
             {
-                player.Hit(15f);
-                transform.parent = hitInfo.transform;
+                touchedPlayer.Hit(15f);
+                StopAndDestroyArrow();
+                transform.parent = hitInfo.transform; // Plante la flèche dans le joueur
             }
         }
-
-        if (hitInfo.tag != "DeathZone" && hitInfo.tag != "Arrow")
+        else if (hitInfo.tag != "DeathZone" && hitInfo.tag != "Arrow")
         {
-            destroyed = true;
-            Object.Destroy(body);
-            Object.Destroy(coll);
-            StartCoroutine(DestroyArrow());
+            StopAndDestroyArrow();
         }
+        if (gameObject != null)
+            GameObject.Destroy(gameObject, 10f);
     }
 
-    IEnumerator DestroyArrow()
+    public void StopAndDestroyArrow()
     {
-        yield return new WaitForSeconds(5f);
-        Object.Destroy(gameObject);
+        destroyed = true;
+        Object.Destroy(body);
+        Object.Destroy(coll);
+        GameObject.Destroy(gameObject, 5f);
     }
+
+    public void SetShootingPlayer(Player _shootingPlayer) => this.shootingPlayer = _shootingPlayer;
 }

@@ -4,18 +4,19 @@ public class Shooting : MonoBehaviour
 {
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private float bowForce = 20f;
+
+    [SerializeField] private Player player;
+    [SerializeField] private PlayerMovement playerMovement;
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && !GetComponent<PlayerMovement>().isDesactivated)
+        if (Input.GetButtonDown("Fire1") && !playerMovement.isDesactivated)
             Shoot();
     }
 
     void Shoot()
     {
         GameObject arrow = Instantiate(arrowPrefab, bow.position, bow.rotation);
-        Rigidbody2D rb = arrow.GetComponent<Rigidbody2D>();
-        rb.AddForce(bow.up * bowForce, ForceMode2D.Impulse);
+        arrow.GetComponent<Arrow>().SetShootingPlayer(player);
     }
 }

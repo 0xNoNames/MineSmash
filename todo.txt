@@ -1,7 +1,17 @@
 - Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
 / coup critique ? Flèche enflammée quand full charge avec du glow
 
+
+- Pas de self damage sur les flèches (ajouter attribut player à la flèche)
+- Suppression de la flèche si elle ne touche rien
+
+- Ejection du joueur
+- Différentes couleurs selon le joueur 
+BUG FLECHE TRAVERSE LE SOL
+
 ARC BANDE FLECHE QUAND RESTE APPUYED
+
+- Animer double saut
 
 - UIManager (methodes pour modifier les elements)
 - SoundManager

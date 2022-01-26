@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8287776905018556289}
   - component: {fileID: 3989888486472046135}
   - component: {fileID: -7244422062116657158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arrow
   m_TagString: Arrow
   m_Icon: {fileID: 0}
@@ -147,3 +147,5 @@ MonoBehaviour:
   body: {fileID: 8287776905018556289}
   coll: {fileID: 3989888486472046135}
   sprite: {fileID: 89782801373992980}
+  DEBUG: 1
+  shootForce: 20

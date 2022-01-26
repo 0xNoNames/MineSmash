@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 118093334}
   - component: {fileID: 118093339}
   m_Layer: 0
-  m_Name: Death triggers
+  m_Name: DeathTriggers
   m_TagString: DeathZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1993103566}
-  camera: {fileID: 519420031}
+  cam: {fileID: 519420031}
   sprite: {fileID: 200921444}
 --- !u!212 &200921444
 SpriteRenderer:
@@ -2160,6 +2160,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920187782}
   m_CullTransparentMesh: 1
+--- !u!1 &1241664842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1241664843}
+  m_Layer: 0
+  m_Name: ArrowDestroyTriggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1241664843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241664842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1390164791}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313434815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2232,6 +2262,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 118093338}
+  - {fileID: 1241664843}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3922,7 +3953,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 200921441}
   arrowPrefab: {fileID: 1629166650038820783, guid: 920cf045a1981714ba248cee251fd1d3, type: 3}
-  bowForce: 20
+  player: {fileID: 1993103566}
+  playerMovement: {fileID: 1993103561}
 --- !u!95 &1993103563
 Animator:
   serializedVersion: 3

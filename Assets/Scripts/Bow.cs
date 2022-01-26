@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bow : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera cam;
     [SerializeField] private SpriteRenderer sprite;
 
     private Rigidbody2D playerRB;
@@ -13,7 +13,7 @@ public class Bow : MonoBehaviour
 
     private void Start() => playerRB = player.GetComponent<Rigidbody2D>();
 
-    void Update() => mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
+    void Update() => mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
     private void FixedUpdate()
     {

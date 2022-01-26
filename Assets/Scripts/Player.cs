@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
 
         // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
 
-
         if (currentPercentage < 999.9f)
         {
             currentPercentage += damage;
@@ -75,6 +74,10 @@ public class Player : MonoBehaviour
         currentPercentage = 0f;
         currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
         currentPercentageUI.GetComponent<UnityEngine.UI.Text>().color = new Color(1, 1, 1);
+
+        // Suppression des flèches plantés dans le joueur
+        for (int i = 1; i < transform.childCount; i++)
+            GameObject.Destroy(transform.GetChild(i).gameObject);
 
         for (int i = 0; i < currentHealthUI.Length; i++)
         {
