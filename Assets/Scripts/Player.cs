@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip[] clips;
 
-    [SerializeField] public bool isInvicible;
+    private bool isInvicible;
 
     public int maxHealth = 3;
     public int currentHealth;

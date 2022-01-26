@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D ridigBody;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    public bool isDesactivated;
+
     [SerializeField] private float maxJumpTime = 0.15f;
     private float jumpTimeCounter;
     private int jumpCount;
@@ -20,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isLeftBlocked;
     private bool isRightBlocked;
     private bool isFastFalling;
-    private bool isDesactivated;
     private bool hasFell;
 
     void Update()

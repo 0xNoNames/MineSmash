@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 118093339}
   m_Layer: 0
   m_Name: Death triggers
-  m_TagString: Untagged
+  m_TagString: DeathZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3906,6 +3906,7 @@ MonoBehaviour:
     m_Bits: 1
   ridigBody: {fileID: 1993103560}
   spriteRenderer: {fileID: 1993103558}
+  isDesactivated: 0
   maxJumpTime: 0.1
 --- !u!114 &1993103562
 MonoBehaviour:
@@ -3921,7 +3922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bow: {fileID: 200921441}
   arrowPrefab: {fileID: 1629166650038820783, guid: 920cf045a1981714ba248cee251fd1d3, type: 3}
-  arrowForce: 20
+  bowForce: 20
 --- !u!95 &1993103563
 Animator:
   serializedVersion: 3
@@ -4017,7 +4018,6 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c831b3eca013b6f4d9a870c270559294, type: 3}
   - {fileID: 8300000, guid: d987266b40ac2d8459384a5dda3cbb84, type: 3}
-  isInvicible: 0
   maxHealth: 3
   currentHealth: 0
   currentPercentage: 0
