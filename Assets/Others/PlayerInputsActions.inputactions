@@ -1,5 +1,5 @@
 {
-    "name": "Player",
+    "name": "PlayerInputsActions",
     "maps": [
         {
             "name": "Player",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Look",
+                    "name": "Aim",
                     "type": "Value",
                     "id": "45fac1c6-ec9c-453e-be2e-f3937f57e92a",
                     "expectedControlType": "Vector2",
@@ -160,7 +160,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Look",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -171,7 +171,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Look",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

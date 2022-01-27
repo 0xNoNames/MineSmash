@@ -201,7 +201,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2243076222259932717}
-  playerSpawn: {fileID: 0}
   animator: {fileID: 2243076222259932719}
   currentHealthUI:
   - {fileID: 0}
@@ -214,6 +213,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 96090003c54210c4c957371624e28b62, type: 3}
   - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
   - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
+  playerID: 0
+  playerSpawn: {x: 0, y: 0}
   isInvicible: 0
   maxHealth: 3
   currentHealth: 0
@@ -347,12 +348,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bow: {fileID: 2243076223651030917}
+  bowAnimator: {fileID: 2243076223651030919}
   arrowPrefab: {fileID: 1629166650038820783, guid: 920cf045a1981714ba248cee251fd1d3, type: 3}
   source: {fileID: 2243076222259932715}
-  shotClip: {fileID: 8300000, guid: a506dc25bdefd744eb2f75e0609fb346, type: 3}
+  shotSound: {fileID: 8300000, guid: a506dc25bdefd744eb2f75e0609fb346, type: 3}
   player: {fileID: 2243076222259932714}
   playerController: {fileID: 2243076222259932717}
-  bowAnimator: {fileID: 0}
+  fireRate: 0.5
 --- !u!114 &2243076222259932724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,8 +399,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2243076223651030918}
-        m_TargetAssemblyTypeName: Bow, Assembly-CSharp
-        m_MethodName: Look
+        m_TargetAssemblyTypeName: BowAim, Assembly-CSharp
+        m_MethodName: Aim
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -475,7 +477,7 @@ MonoBehaviour:
     m_ActionId: f8b19fc6-db1d-48af-94c9-b60ae7cc40b2
     m_ActionName: UI/RightClick[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -575,7 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771bb178b3d83294bb38b3e10eda4a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   sprite: {fileID: 2243076223651030912}
   playerRB: {fileID: 2243076222259932716}
 --- !u!95 &2243076223651030919

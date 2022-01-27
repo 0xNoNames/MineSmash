@@ -11,12 +11,12 @@ public class BowAim : MonoBehaviour
     private Camera cam;
     private Vector2 mousePos;
 
-    public void Look(InputAction.CallbackContext context)
+    public void Aim(InputAction.CallbackContext mouseMovement)
     {
-        mousePos = cam.ScreenToWorldPoint(context.ReadValue<Vector2>());
+        mousePos = cam.ScreenToWorldPoint(mouseMovement.ReadValue<Vector2>());
     }
 
-    private void Start()
+    private void Awake()
     {
         cam = FindObjectOfType<Camera>();
     }
