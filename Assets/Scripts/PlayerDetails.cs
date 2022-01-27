@@ -27,44 +27,17 @@ public class PlayerDetails : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    public void Initialize(int _playerID, Vector2 _playerSpawn)
+    {
+        playerID = _playerID;
+        playerSpawn = _playerSpawn;
+    }
+
     public void Death()
     {
-        HealthDown();
         StopCoroutine("RespawnAnimation");
         StartCoroutine("RespawnAnimation");
-    }
 
-    public void Hit(float damage)
-    {
-        if (isInvicible)
-            return;
-
-        source.PlayOneShot(hitClips[Random.Range(0, hitClips.Length)], 0.25f);
-
-        StopCoroutine("DamagedAnimation");
-        StartCoroutine("DamagedAnimation");
-
-        StopCoroutine("DamagedStun");
-        StartCoroutine(DamagedStun(currentPercentage / 500));
-
-        // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
-
-        if (currentPercentage < 999.9f)
-        {
-            currentPercentage += damage * 0.37f;
-            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
-            float delta = currentPercentage / 150;
-            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().color = new Color(1, 1 - delta, 1 - delta);
-        }
-        else
-        {
-            currentPercentage = 999.9f;
-            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
-        }
-    }
-
-    public void HealthDown()
-    {
         currentHealth -= 1;
         currentPercentage = 0f;
         currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
@@ -83,17 +56,41 @@ public class PlayerDetails : MonoBehaviour
         }
     }
 
-    public void Initialize(int _playerID, Vector2 _playerSpawn)
+    public void Hit(float damage)
     {
-        playerID = _playerID;
-        playerSpawn = _playerSpawn;
+        if (isInvicible)
+            return;
+
+        source.PlayOneShot(hitClips[Random.Range(0, hitClips.Length)], 0.25f);
+
+        StopCoroutine("DamagedAnimation");
+        StartCoroutine("DamagedAnimation");
+
+        // Etourdi le joueur pendant x secondes selon son pourcentage
+        StopCoroutine("DamagedStun");
+        StartCoroutine(DamagedStun(currentPercentage / 500));
+
+        // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur
+
+        if (currentPercentage < 999.9f)
+        {
+            currentPercentage += damage * 0.37f;
+            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
+            float delta = currentPercentage / 150;
+            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().color = new Color(1, 1 - delta, 1 - delta);
+        }
+        else
+        {
+            currentPercentage = 999.9f;
+            currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
+        }
     }
 
     private IEnumerator DamagedStun(float seconds)
     {
-        playerController.SetDesactivateStateHit(true);
+        playerController.SetDesactivateState(true, false);
         yield return new WaitForSeconds(seconds);
-        playerController.SetDesactivateStateHit(false);
+        playerController.SetDesactivateState(false, false);
     }
 
     private IEnumerator DamagedAnimation()
@@ -105,15 +102,14 @@ public class PlayerDetails : MonoBehaviour
         animator.SetBool("isDamaged", false);
     }
 
-    private IEnumerator SpawnAnimation()
-    {
-        yield return new WaitForSeconds(1f);
-    }
-
+    //private IEnumerator SpawnAnimation()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //}
 
     private IEnumerator RespawnAnimation()
     {
-        playerController.SetDesactivateStateDeath(true);
+        playerController.SetDesactivateState(true, true);
 
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
@@ -126,7 +122,7 @@ public class PlayerDetails : MonoBehaviour
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
 
-        playerController.SetDesactivateStateDeath(false);
+        playerController.SetDesactivateState(false, false);
 
         yield return new WaitForSeconds(2.5f);
 

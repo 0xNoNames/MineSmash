@@ -60,6 +60,7 @@ public class ArrowDetails : MonoBehaviour
             if (!touchedDummy.isInvicible)
             {
                 StopAndDestroy();
+
                 // Plante la flèche dans le dummy
                 transform.parent = hitInfo.transform;
                 touchedDummy.Hit(shootingForce);

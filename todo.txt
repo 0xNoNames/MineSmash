@@ -1,5 +1,8 @@
 - Fix le saut
 - Fix l'angle de tir avec la manette (vérifier souris ou manette)
+- Fix trigger isRight/LeftBlocked qui peut empêcher de faire revenir sur le terrain
+
+- Clic molette pour faire spawn et bouger un seul dummy ?
 
 - Changer taille de la map / trigger lorsque joueur en dehors de la cam ?
 

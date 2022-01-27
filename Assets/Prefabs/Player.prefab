@@ -231,9 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43156f3b4782dc04aa7be4a265203234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 300
-  jumpHeight: 15
-  maxJumps: 2
   wideBodyCollider: {fileID: 2243076222259932712}
   narrowBodyCollider: {fileID: 2243076222259932713}
   collisionLayer:
@@ -241,8 +238,11 @@ MonoBehaviour:
     m_Bits: 1
   rigidBody: {fileID: 2243076222259932716}
   spriteRenderer: {fileID: 2243076222259932706}
-  isDesactivated: 0
-  maxJumpTime: 0.1
+  playerInput: {fileID: 2243076222259932724}
+  moveSpeed: 300
+  jumpHeight: 20
+  secondJumpRatio: 1.25
+  maxJumps: 2
 --- !u!50 &2243076222259932716
 Rigidbody2D:
   serializedVersion: 4

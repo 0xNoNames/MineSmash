@@ -37,22 +37,23 @@ public class PlayerShoot : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext keyPress)
     {
-        if (keyPress.started && !playerController.isDesactivated)
+        if (keyPress.started && !playerController.GetDesactivateState())
         {
             bowAnimator.SetBool("isBending", true);
             isCharging = true;
         }
 
-        if (keyPress.canceled)
+        if (keyPress.canceled && Time.time - lastFireTime > fireRate && !playerController.GetDesactivateState())
+        {
+            Shoot();
+            isCharging = false;
+            bowAnimator.SetBool("isBending", false);
+            lastFireTime = Time.time;
+        }
+        else if (keyPress.canceled)
         {
             isCharging = false;
             bowAnimator.SetBool("isBending", false);
-        }
-
-        if (keyPress.canceled && Time.time - lastFireTime > fireRate && !playerController.isDesactivated)
-        {
-            Shoot();
-            lastFireTime = Time.time;
         }
     }
 
