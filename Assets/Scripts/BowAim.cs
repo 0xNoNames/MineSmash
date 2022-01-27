@@ -10,27 +10,27 @@ public class BowAim : MonoBehaviour
 
     private Camera cam;
     private Vector2 aimPos;
-    private bool isUsingGamepad;
+    private bool isUsingMouse;
 
     private void Awake()
     {
         cam = FindObjectOfType<Camera>();
         if (GetComponentInParent<PlayerInput>().currentControlScheme == "Keyboard&Mouse")
-            isUsingGamepad = true;
+            isUsingMouse = true;
         else
-            isUsingGamepad = false;
+            isUsingMouse = false;
     }
 
     private void FixedUpdate()
     {
         Vector2 lookDir = aimPos;
 
-        if (!isUsingGamepad)
+        if (isUsingMouse)
             lookDir -= playerRB.position;
 
         float angle = Mathf.Atan2(lookDir.y, lookDir.x);
 
-        float distance = 0.5f;
+        float distance = 0.75f;
 
         sprite.transform.position = new Vector2(playerRB.position.x + Mathf.Cos(angle) * distance, playerRB.position.y + Mathf.Sin(angle) * distance);
 
@@ -39,14 +39,9 @@ public class BowAim : MonoBehaviour
 
     public void Aim(InputAction.CallbackContext inputAim)
     {
-        if (isUsingGamepad)
-            aimPos = inputAim.ReadValue<Vector2>();
-        else
-            aimPos = cam.ScreenToWorldPoint(inputAim.ReadValue<Vector2>());
-    }
+        aimPos = inputAim.ReadValue<Vector2>();
 
-    public void OnDeviceChange(PlayerInput.ControlsChangedEvent deviceChange)
-    {
-        print(deviceChange);
+        if (isUsingMouse)
+            aimPos = cam.ScreenToWorldPoint(aimPos);
     }
 }

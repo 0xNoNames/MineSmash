@@ -14,9 +14,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private PlayerDetails player;
     [SerializeField] private PlayerController playerController;
 
-
     [SerializeField] private float fireRate = 0.5f;
-
 
     private float lastFireTime = 0f;
     private float fireChargeMin = 5f;

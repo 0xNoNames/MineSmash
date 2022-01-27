@@ -6,5 +6,7 @@ public class DeathZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
             collision.GetComponent<PlayerDetails>().Death();
+        else if (collision.CompareTag("Arrow"))
+            collision.GetComponent<ArrowDetails>().Destroy();
     }
 }

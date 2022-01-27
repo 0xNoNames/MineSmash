@@ -8,6 +8,7 @@ TagManager:
   - Solid
   - Dummy
   - DummyPercentage
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - UI
   - Player
   - Dummy
-  - 
-  - 
-  - 
+  - PropsInBack
+  - Arrow
+  - PropsInFront
   - 
   - 
   - 

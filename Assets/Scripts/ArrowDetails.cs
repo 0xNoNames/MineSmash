@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowDetails : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D body;
+    [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private BoxCollider2D coll;
     [SerializeField] private SpriteRenderer sprite;
 
@@ -17,14 +17,14 @@ public class ArrowDetails : MonoBehaviour
 
     private void Start()
     {
-        body.AddForce(transform.up * shootingForce, ForceMode2D.Impulse);
+        rigidBody.AddForce(transform.up * shootingForce, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate()
     {
         if (!destroyed)
         {
-            float angle = Mathf.Atan2(body.velocity.x, body.velocity.y) * -Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(rigidBody.velocity.x, rigidBody.velocity.y) * -Mathf.Rad2Deg;
             sprite.transform.eulerAngles = new Vector3(0, 0, angle);
         }
     }
@@ -48,7 +48,7 @@ public class ArrowDetails : MonoBehaviour
                 StopAndDestroy();
                 // Plante la flèche dans le joueur
                 transform.parent = hitInfo.transform;
-                touchedPlayer.Hit(shootingForce);
+                touchedPlayer.Hit(rigidBody.velocity);
             }
         }
 
@@ -63,19 +63,20 @@ public class ArrowDetails : MonoBehaviour
 
                 // Plante la flèche dans le dummy
                 transform.parent = hitInfo.transform;
-                touchedDummy.Hit(shootingForce);
+                //touchedDummy.Hit(rigidBody.velocity);
             }
         }
+    }
 
-        // Si la flèche sort de la zone de jeu
-        else if (hitInfo.tag == "DeathZone")
-            GameObject.Destroy(gameObject, 30f);
+    public void Destroy()
+    {
+        GameObject.Destroy(gameObject, 30f);
     }
 
     public void StopAndDestroy()
     {
         destroyed = true;
-        Object.Destroy(body);
+        Object.Destroy(rigidBody);
         Object.Destroy(coll);
         GameObject.Destroy(gameObject, 5f);
     }
