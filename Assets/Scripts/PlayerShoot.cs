@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Shooting : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform bow;
     [SerializeField] private GameObject arrowPrefab;
@@ -9,7 +9,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip shotClip;
 
-    [SerializeField] private Player player;
+    [SerializeField] private PlayerDetails player;
     [SerializeField] private PlayerController playerController;
 
     [SerializeField] private Animator bowAnimator;
@@ -18,9 +18,12 @@ public class Shooting : MonoBehaviour
     private float fireRate = 0.5f;
     private float fireCharge = 5f;
 
-    private void Start() => bowAnimator = bow.GetComponent<Animator>();
+    private void Start()
+    {
+        bowAnimator = bow.GetComponent<Animator>();
+    }
 
-    void Update()
+    private void Update()
     {
         //if (Input.GetButton("Fire1") && !playerController.isDesactivated)
         //{
@@ -46,7 +49,6 @@ public class Shooting : MonoBehaviour
     {
         if (context.performed && !playerController.isDesactivated)
             Shoot();
-
     }
 
     void Shoot()
@@ -54,7 +56,7 @@ public class Shooting : MonoBehaviour
         source.PlayOneShot(shotClip, 0.25f);
 
         GameObject arrow = Instantiate(arrowPrefab, bow.position, bow.rotation);
-        Arrow arrowComponent = arrow.GetComponent<Arrow>();
+        ArrowDetails arrowComponent = arrow.GetComponent<ArrowDetails>();
         arrowComponent.SetShootingPlayer(player);
         arrowComponent.SetShootingForce(fireCharge);
     }

@@ -1,10 +1,19 @@
-- Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
-/ coup critique ? Flèche enflammée quand full charge avec du glow
-- ARC BANDE FLECHE QUAND RESTE APPUYED
+- Fix le saut
+- Fix l'angle de tir avec la manette (vérifier souris ou manette)
+
+- Changer taille de la map / trigger lorsque joueur en dehors de la cam ?
+
+- Spawn de joueur UI
+
+- Flèches coup critique ? Flèche enflammée quand full charge avec du glow
+
+- Joueur invincible au spawn 
 
 - Ejection du joueur
+
+- Dash dans direction (invincible mais faut être grounded pour redash)
+
 - Différents skin et flèches selon le joueur 
-BUG FLECHE TRAVERSE LE SOL
 
 - Playsound avant ou après les autres appels de fonction ?
 
@@ -12,8 +21,6 @@ BUG FLECHE TRAVERSE LE SOL
 
 - UIManager (methodes pour modifier les elements)
 - SoundManager
-- Dash dans direction (invincible mais faut être grounded pour redash)
-
 - GameManager (spawns, lancement partie, fin partie)
 
 - Pouvoir s'accrocher aux rebords (collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
@@ -21,17 +28,20 @@ BUG FLECHE TRAVERSE LE SOL
 - Walljumps
 - Ajouter friction pour les walljumps ?
 
+- Système de headshot (*10 la puissance ?)
+
+- Optimiser les png en comme terrain.png
+
 - Animation sortie d'écran ?
 - Ajout des ombres / glow / particules
-- Passer en 2.5D ?
 - Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
-
-- Système de headshot (*10 la puissance ?)
 
 - Système météo / journée qui passe (avec un slerp sur le soleil)
 
 - Debug le hasFell qui passe dans la boucle lors du saut
 
-MULTIPLAYER
+- MULTIPLAYER
+
+- Passer en 2.5D ?
 
 https://youtu.be/3sWTzMsmdx8?t=61

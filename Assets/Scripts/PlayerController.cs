@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    
+
     public bool isDesactivated;
 
     [SerializeField] private float maxJumpTime = 0.15f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private bool isFastFalling;
     private bool hasFell;
 
-    void Update()
+    private void Update()
     {
         if (isDesactivated)
             return;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         Flip(rigidBody.velocity.x);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         isGrounded = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
         isLeftBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer);
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    void FastFall()
+    private void FastFall()
     {
         if (!isGrounded && !isFastFalling)
         {

@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Bow : MonoBehaviour
+public class BowAim : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Rigidbody2D playerRB;
 
+    private Camera cam;
     private Vector2 mousePos;
 
-    public void Look(InputAction.CallbackContext context) => mousePos = cam.ScreenToWorldPoint(context.ReadValue<Vector2>());
+    public void Look(InputAction.CallbackContext context)
+    {
+        mousePos = cam.ScreenToWorldPoint(context.ReadValue<Vector2>());
+    }
+
+    private void Start()
+    {
+        cam = FindObjectOfType<Camera>();
+    }
 
     private void FixedUpdate()
     {

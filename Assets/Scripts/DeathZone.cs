@@ -5,6 +5,6 @@ public class DeathZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            collision.GetComponent<Player>().Death();
+            collision.GetComponent<PlayerDetails>().Death();
     }
 }

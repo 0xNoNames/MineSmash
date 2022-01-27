@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class ArrowDetails : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D body;
     [SerializeField] private BoxCollider2D coll;
@@ -11,14 +11,14 @@ public class Arrow : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip[] missClip;
 
-    [SerializeField] private bool selfDamage;
-
-
     private float shootingForce;
     private bool destroyed;
-    private Player shootingPlayer;
+    private PlayerDetails shootingPlayer;
 
-    private void Start() => body.AddForce(transform.up * shootingForce, ForceMode2D.Impulse);
+    private void Start()
+    {
+        body.AddForce(transform.up * shootingForce, ForceMode2D.Impulse);
+    }
 
     private void FixedUpdate()
     {
@@ -41,14 +41,28 @@ public class Arrow : MonoBehaviour
         // Si la flèche touche un joueur
         else if (hitInfo.tag == "Player")
         {
-            Player touchedPlayer = hitInfo.GetComponent<Player>();
+            PlayerDetails touchedPlayer = hitInfo.GetComponent<PlayerDetails>();
 
-            if (touchedPlayer != (shootingPlayer && !selfDamage) && !touchedPlayer.isInvicible)
+            if (touchedPlayer != shootingPlayer && !touchedPlayer.isInvicible)
             {
                 StopAndDestroy();
                 // Plante la flèche dans le joueur
                 transform.parent = hitInfo.transform;
                 touchedPlayer.Hit(shootingForce);
+            }
+        }
+
+        // Si la flèche touche un mannequin
+        else if (hitInfo.tag == "Dummy")
+        {
+            DummyDetails touchedDummy = hitInfo.GetComponent<DummyDetails>();
+
+            if (!touchedDummy.isInvicible)
+            {
+                StopAndDestroy();
+                // Plante la flèche dans le dummy
+                transform.parent = hitInfo.transform;
+                touchedDummy.Hit(shootingForce);
             }
         }
 
@@ -65,7 +79,13 @@ public class Arrow : MonoBehaviour
         GameObject.Destroy(gameObject, 5f);
     }
 
-    public void SetShootingPlayer(Player _shootingPlayer) => this.shootingPlayer = _shootingPlayer;
+    public void SetShootingPlayer(PlayerDetails _shootingPlayer)
+    {
+        this.shootingPlayer = _shootingPlayer;
+    }
 
-    public void SetShootingForce(float _shootingForce) => this.shootingForce = _shootingForce;
+    public void SetShootingForce(float _shootingForce)
+    {
+        this.shootingForce = _shootingForce;
+    }
 }
