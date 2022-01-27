@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Bow : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Bow : MonoBehaviour
 
     private Vector2 mousePos;
 
-    void Update() => mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+    public void Look(InputAction.CallbackContext context) => mousePos = cam.ScreenToWorldPoint(context.ReadValue<Vector2>());
 
     private void FixedUpdate()
     {

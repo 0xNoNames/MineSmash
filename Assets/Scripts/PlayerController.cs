@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 300;
     [SerializeField] private float jumpHeight = 15;
@@ -9,14 +10,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private BoxCollider2D wideBodyCollider;
     [SerializeField] private BoxCollider2D narrowBodyCollider;
     [SerializeField] private LayerMask collisionLayer;
-    [SerializeField] private Rigidbody2D ridigBody;
+    [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private SpriteRenderer spriteRenderer;
-
+    
     public bool isDesactivated;
 
     [SerializeField] private float maxJumpTime = 0.15f;
     private float jumpTimeCounter;
     private int jumpCount;
+
+    private Vector2 inputMove;
 
     private bool isGrounded;
     private bool isLeftBlocked;
@@ -29,24 +32,17 @@ public class PlayerMovement : MonoBehaviour
         if (isDesactivated)
             return;
 
-        if (Input.GetButtonDown("Jump") && jumpCount > 0)
-            Jump();
-
-        if (Input.GetButton("Jump") && !isGrounded && jumpCount == maxJumps - 1)
-        {
-            if (jumpTimeCounter > 0f)
-            {
-                ridigBody.velocity = new Vector2(ridigBody.velocity.x, jumpHeight);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-        }
-
-        if (Input.GetAxisRaw("Vertical") < -0.5)
+        if (inputMove.y < -0.5)
             FastFall();
 
-        MovePlayer(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.fixedDeltaTime);
+        float horizontalMovement = inputMove.x * moveSpeed * Time.fixedDeltaTime;
 
-        Flip(ridigBody.velocity.x);
+        if (!isLeftBlocked && horizontalMovement < 0 || !isRightBlocked && horizontalMovement > 0)
+            rigidBody.velocity = new Vector2(horizontalMovement, rigidBody.velocity.y);
+        else
+            rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
+
+        Flip(rigidBody.velocity.x);
     }
 
     void FixedUpdate()
@@ -70,32 +66,45 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void MovePlayer(float _horizontalMovement)
+    public void Move(InputAction.CallbackContext context)
     {
-        if (!isLeftBlocked && _horizontalMovement < 0 || !isRightBlocked && _horizontalMovement > 0)
-            ridigBody.velocity = new Vector2(_horizontalMovement, ridigBody.velocity.y);
-        else
-            ridigBody.velocity = new Vector2(0, ridigBody.velocity.y);
+        inputMove = context.ReadValue<Vector2>();
     }
-    void Jump()
+
+    public void Jump(InputAction.CallbackContext context)
     {
-        jumpCount--;
-        isFastFalling = false;
-        ridigBody.velocity = new Vector2(ridigBody.velocity.x, jumpHeight);
+        if (context.performed && jumpCount > 0)
+        {
+            jumpCount--;
+            isFastFalling = false;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
+        }
+
+        if (context.canceled && rigidBody.velocity.y > 0f)
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * 0.5f);
+
+        //if (Input.GetButton("Jump") && !isGrounded && jumpCount == maxJumps - 1)
+        //{
+        //    if (jumpTimeCounter > 0f)
+        //    {
+        //        rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
+        //        jumpTimeCounter -= Time.deltaTime;
+        //    }
+        //}
     }
 
     void FastFall()
     {
         if (!isGrounded && !isFastFalling)
         {
-            ridigBody.velocity = new Vector2(ridigBody.velocity.x, -jumpHeight);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, -jumpHeight);
             isFastFalling = true;
         }
     }
 
     public void SetDesactivateStateDeath(bool state)
     {
-        ridigBody.velocity = new Vector2(0, 0);
+        rigidBody.velocity = new Vector2(0, 0);
         isDesactivated = state;
     }
 

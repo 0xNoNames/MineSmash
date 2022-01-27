@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shooting : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private AudioClip shotClip;
 
     [SerializeField] private Player player;
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerController playerController;
 
     [SerializeField] private Animator bowAnimator;
 
@@ -21,24 +22,31 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && !playerMovement.isDesactivated)
-        {
-            bowAnimator.SetBool("isBending", true);
-            if (fireCharge < 55f)
-                fireCharge += Time.deltaTime * 33.3f;
-        }
+        //if (Input.GetButton("Fire1") && !playerController.isDesactivated)
+        //{
+        //    bowAnimator.SetBool("isBending", true);
+        //    if (fireCharge < 55f)
+        //        fireCharge += Time.deltaTime * 33.3f;
+        //}
 
-        if (Input.GetButtonUp("Fire1") && Time.time - lastFireTime > fireRate && !playerMovement.isDesactivated)
-        {
+        //if (Input.GetButtonUp("Fire1") && Time.time - lastFireTime > fireRate && !playerController.isDesactivated)
+        //{
+        //    Shoot();
+        //    lastFireTime = Time.time;
+        //}
+
+        //if (Input.GetButtonUp("Fire1"))
+        //{
+        //    fireCharge = 5f;
+        //    bowAnimator.SetBool("isBending", false);
+        //}
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+        if (context.performed && !playerController.isDesactivated)
             Shoot();
-            lastFireTime = Time.time;
-        }
 
-        if (Input.GetButtonUp("Fire1"))
-        {
-            fireCharge = 5f;
-            bowAnimator.SetBool("isBending", false);
-        }
     }
 
     void Shoot()

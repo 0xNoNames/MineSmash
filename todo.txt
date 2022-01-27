@@ -28,6 +28,8 @@ BUG FLECHE TRAVERSE LE SOL
 
 - Système de headshot (*10 la puissance ?)
 
+- Système météo / journée qui passe (avec un slerp sur le soleil)
+
 - Debug le hasFell qui passe dans la boucle lors du saut
 
 MULTIPLAYER

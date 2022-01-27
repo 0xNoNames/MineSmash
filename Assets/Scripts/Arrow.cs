@@ -54,7 +54,7 @@ public class Arrow : MonoBehaviour
 
         // Si la flèche sort de la zone de jeu
         else if (hitInfo.tag == "DeathZone")
-            GameObject.Destroy(gameObject, 10f);
+            GameObject.Destroy(gameObject, 30f);
     }
 
     public void StopAndDestroy()

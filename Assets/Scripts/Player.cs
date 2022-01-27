@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private Animator animator;
 
@@ -26,10 +26,10 @@ public class Player : MonoBehaviour
      */
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-            Hit(5f);
-        if (Input.GetKeyDown(KeyCode.K))
-            Death();
+        //if (Input.GetKeyDown(KeyCode.H))
+        //    Hit(5f);
+        //if (Input.GetKeyDown(KeyCode.K))
+        //    Death();
     }
 
     public void Death()
@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
 
         if (currentPercentage < 999.9f)
         {
-            print(damage);
             currentPercentage += damage * 0.37f;
             currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
             float delta = currentPercentage / 150;
@@ -91,9 +90,9 @@ public class Player : MonoBehaviour
 
     IEnumerator DamagedStun(float seconds)
     {
-        playerMovement.SetDesactivateStateHit(true);
+        playerController.SetDesactivateStateHit(true);
         yield return new WaitForSeconds(seconds);
-        playerMovement.SetDesactivateStateHit(false);
+        playerController.SetDesactivateStateHit(false);
     }
 
     IEnumerator DamagedAnimation()
@@ -107,7 +106,9 @@ public class Player : MonoBehaviour
 
     IEnumerator RespawnAnimation()
     {
-        playerMovement.SetDesactivateStateDeath(true);
+        if (playerController != null)
+            playerController.SetDesactivateStateDeath(true);
+
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
         isInvicible = true;
@@ -118,7 +119,9 @@ public class Player : MonoBehaviour
 
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
-        playerMovement.SetDesactivateStateDeath(false);
+
+        if (playerController != null)
+            playerController.SetDesactivateStateDeath(false);
 
         yield return new WaitForSeconds(2.5f);
 
