@@ -9,6 +9,8 @@
 
 - Deuxième saut bugged (améliorer short)
 
+- Bander l'arc seulement lorsqu'il peut tirer
+
 - Fix trigger isRight/LeftBlocked qui peut empêcher de faire revenir sur le terrain
 
 - Empêcher de garder le tir chargé avant de mourir au respawn (reset animation + isCharging)
@@ -22,15 +24,14 @@
 - Joueur invincible au spawn (GameManager : lorsque deux joueurs sont connectés -> respawn et attente 3 2 1)
 
 - Dash dans direction (invincible mais faut être grounded pour redash)
+- WaveDash ?
 
 - Ne pas reset la position de l'arc lorsque le joueur lâche le joystick
-
-- Playsound avant ou après les autres appels de fonction ?
 
 - Animer double saut
 - Petite particule lorsque le joueur réussi son fast fall
 
-- UIManager (methodes pour modifier les elements) (ajouter ANYKEY/START to join en opacity .5 et clignote)
+- UIManager (methodes pour modifier les elements) (ajouter UI "PRESS ANY KEY/START" to join en opacity .5 et clignote)
 - SoundManager
 - GameManager (spawns, lancement partie, fin partie)
 
@@ -45,6 +46,8 @@
 
 - Animation sortie d'écran ?
 - Ajout des ombres / glow / particules
+- animations en shader (genre blink https://youtu.be/utctXNpc28A?t=15)
+- Freeze frame dernière vie ?
 - Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
 
 - MENU PRINCIPAL (choisir skin, choisir map, changer nom)
