@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2998125904657522610}
   - component: {fileID: 2998125904657522611}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Health 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ecd7fc8c2a45e4cbee1b451b36b9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prct: {fileID: 2998125905810010804}
+  percentage: {fileID: 2998125905810010804}
+  health:
+  - {fileID: 2998125905169953285}
+  - {fileID: 2998125904657522611}
+  - {fileID: 2998125906166352013}
 --- !u!1 &2998125905169953787
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +188,7 @@ GameObject:
   - component: {fileID: 2998125905169953284}
   - component: {fileID: 2998125905169953285}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Health 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,7 +342,7 @@ GameObject:
   - component: {fileID: 2998125906166352012}
   - component: {fileID: 2998125906166352013}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Health 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

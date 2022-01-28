@@ -9,6 +9,10 @@ public class PlayerSpawnManager : MonoBehaviour
 
     void OnPlayerJoined(PlayerInput playerInput)
     {
-        playerInput.gameObject.GetComponent<PlayerDetails>().Initialize(playerInput.playerIndex + 1, spawnLocations[playerInput.playerIndex].position);
+        playerInput.GetComponent<PlayerDetails>().Initialize(playerInput.playerIndex + 1, spawnLocations[playerInput.playerIndex].position);
+
+        UIManager.Instance.getPlayerUI(playerInput.playerIndex).gameObject.SetActive(true);
+
+        GameManager.Instance.playerList.Add(playerInput.GetComponent<PlayerDetails>());
     }
 }

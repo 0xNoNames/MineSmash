@@ -5,5 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerCanvas : MonoBehaviour
 {
-    public Text prct;
+    public Text percentage;
+    public Image[] health;
 }

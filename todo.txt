@@ -1,24 +1,27 @@
 - Ejection du joueur (mettre les bumpx et bumpy + courbe cercle inversée pour les dégâts)
 
-- Deuxième saut bugged
+- Changer touche de saut manette
+
+- Mettre la tête du perso dans l'ui (pour identifier) (p'tet un petit draw autout du skin de la même couleur que l'ui)
+- Afficher nom du joueur au dessu de celui-ci (en petit)
+
+- Différents skin et flèches selon le joueur 
+
+- Deuxième saut bugged (améliorer short)
 
 - Fix trigger isRight/LeftBlocked qui peut empêcher de faire revenir sur le terrain
 
 - Empêcher de garder le tir chargé avant de mourir au respawn (reset animation + isCharging)
 
-- Spawn de joueur UI
+- Spawn de joueur UI (plus de 3 joueurs)
 
 - Clic molette pour faire spawn et bouger un seul dummy ?
-
-- Changer taille de la map / trigger lorsque joueur en dehors de la cam ?
 
 - Flèches coup critique ? Flèche enflammée quand full charge avec du glow
 
 - Joueur invincible au spawn (GameManager : lorsque deux joueurs sont connectés -> respawn et attente 3 2 1)
 
 - Dash dans direction (invincible mais faut être grounded pour redash)
-
-- Différents skin et flèches selon le joueur 
 
 - Ne pas reset la position de l'arc lorsque le joueur lâche le joystick
 
@@ -27,7 +30,7 @@
 - Animer double saut
 - Petite particule lorsque le joueur réussi son fast fall
 
-- UIManager (methodes pour modifier les elements)
+- UIManager (methodes pour modifier les elements) (ajouter ANYKEY/START to join en opacity .5 et clignote)
 - SoundManager
 - GameManager (spawns, lancement partie, fin partie)
 
@@ -43,6 +46,8 @@
 - Animation sortie d'écran ?
 - Ajout des ombres / glow / particules
 - Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
+
+- MENU PRINCIPAL (choisir skin, choisir map, changer nom)
 
 - Système météo / journée qui passe (avec un slerp sur le soleil)
 
