@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerDetails : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class PlayerDetails : MonoBehaviour
 
     private void Start()
     {
+        Spawn();
+    }
+
+    public void Spawn()
+    {
         transform.position = playerSpawn;
         currentHealth = maxHealth;
     }
@@ -39,20 +45,21 @@ public class PlayerDetails : MonoBehaviour
         currentHealth -= 1;
         currentPercentage = 0f;
 
-        UIManager.Instance.getPlayerUI(playerID - 1).prct.text = currentPercentage.ToString("0.0") + "%";
-        UIManager.Instance.getPlayerUI(playerID - 1).prct.color = new Color(1, 1, 1);
+        UIManager.Instance.getPlayerUI(playerID - 1).percentage.text = currentPercentage.ToString("0.0") + "%";
+        UIManager.Instance.getPlayerUI(playerID - 1).percentage.color = new Color(1, 1, 1);
 
         // Suppression des fl�ches plant�s dans le joueur
         for (int i = 1; i < transform.childCount; i++)
             GameObject.Destroy(transform.GetChild(i).gameObject);
 
-        //for (int i = 0; i < currentHealthUI.Length; i++)
-        //{
-        //    if (currentHealth > i)
-        //        currentHealthUI[i].SetActive(true);
-        //    else
-        //        currentHealthUI[i].SetActive(false);
-        //}
+
+        for (int i = 0; i < UIManager.Instance.getPlayerUI(playerID - 1).health.Length; i++)
+        {
+            if (currentHealth > i)
+                UIManager.Instance.getPlayerUI(playerID - 1).health[i].gameObject.SetActive(true);
+            else
+                UIManager.Instance.getPlayerUI(playerID - 1).health[i].gameObject.SetActive(false);
+        }
     }
 
     public void Hit(Vector2 arrowVelocity)
@@ -77,8 +84,8 @@ public class PlayerDetails : MonoBehaviour
             currentPercentage = 999.9f;
 
         float delta = currentPercentage / 150;
-        UIManager.Instance.getPlayerUI(playerID - 1).prct.text = currentPercentage.ToString("0.0") + "%";
-        UIManager.Instance.getPlayerUI(playerID - 1).prct.color = new Color(1, 1 - delta, 1 - delta);
+        UIManager.Instance.getPlayerUI(playerID - 1).percentage.text = currentPercentage.ToString("0.0") + "%";
+        UIManager.Instance.getPlayerUI(playerID - 1).percentage.color = new Color(1, 1 - delta, 1 - delta);
     }
 
     private IEnumerator DamagedStun(float seconds)
