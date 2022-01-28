@@ -1,40 +1,38 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class DummyDetails : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private Transform playerSpawn;
     [SerializeField] private Animator animator;
 
-    [SerializeField] private GameObject[] currentHealthUI;
     [SerializeField] private GameObject currentPercentageUI;
 
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip[] hitClips;
 
+    public Vector2 startPos;
+
     public bool isInvicible;
 
-    public int maxHealth = 3;
-    public int currentHealth;
     public float currentPercentage;
 
-    private void Start() => currentHealth = maxHealth;
-
-    /*
-     *  DEBUG
-     */
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-            Hit(5f);
-        if (Input.GetKeyDown(KeyCode.K))
-            Death();
+        startPos = transform.position;
+        currentPercentageUI = GameObject.FindGameObjectWithTag("DummyPercentage");
     }
+
+    //private void Update()
+    //{
+    //    if ("H")
+    //        currentPercentage += 5;
+    //    if ("K")
+    //        Death();
+    //}
 
     public void Death()
     {
-        HealthDown();
         StopCoroutine("RespawnAnimation");
         StartCoroutine("RespawnAnimation");
     }
@@ -49,14 +47,10 @@ public class Player : MonoBehaviour
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
 
-        StopCoroutine("DamagedStun");
-        StartCoroutine(DamagedStun(currentPercentage / 500));
-
         // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
 
         if (currentPercentage < 999.9f)
         {
-            print(damage);
             currentPercentage += damage * 0.37f;
             currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
             float delta = currentPercentage / 150;
@@ -69,33 +63,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void HealthDown()
-    {
-        currentHealth -= 1;
-        currentPercentage = 0f;
-        currentPercentageUI.GetComponent<UnityEngine.UI.Text>().text = currentPercentage.ToString("0.0") + "%";
-        currentPercentageUI.GetComponent<UnityEngine.UI.Text>().color = new Color(1, 1, 1);
-
-        // Suppression des flèches plantés dans le joueur
-        for (int i = 1; i < transform.childCount; i++)
-            GameObject.Destroy(transform.GetChild(i).gameObject);
-
-        for (int i = 0; i < currentHealthUI.Length; i++)
-        {
-            if (currentHealth > i)
-                currentHealthUI[i].SetActive(true);
-            else
-                currentHealthUI[i].SetActive(false);
-        }
-    }
-
-    IEnumerator DamagedStun(float seconds)
-    {
-        playerMovement.SetDesactivateStateHit(true);
-        yield return new WaitForSeconds(seconds);
-        playerMovement.SetDesactivateStateHit(false);
-    }
-
     IEnumerator DamagedAnimation()
     {
         isInvicible = true;
@@ -105,20 +72,24 @@ public class Player : MonoBehaviour
         animator.SetBool("isDamaged", false);
     }
 
+    IEnumerator SpawnAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+
+
     IEnumerator RespawnAnimation()
     {
-        playerMovement.SetDesactivateStateDeath(true);
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
         isInvicible = true;
 
-        transform.position = playerSpawn.position;
+        transform.position = startPos;
 
         yield return new WaitForSeconds(1f);
 
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
-        playerMovement.SetDesactivateStateDeath(false);
 
         yield return new WaitForSeconds(2.5f);
 

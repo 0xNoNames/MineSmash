@@ -4,10 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player1Spawn
-  - Undefined
   - DeathZone
   - Solid
+  - Dummy
+  - DummyPercentage
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -16,10 +17,10 @@ TagManager:
   - Water
   - UI
   - Player
+  - Dummy
+  - PropsInBack
   - Arrow
-  - 
-  - 
-  - 
+  - PropsInFront
   - 
   - 
   - 

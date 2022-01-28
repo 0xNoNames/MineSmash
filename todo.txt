@@ -1,19 +1,34 @@
-- Tirer fleche du coup vitesse/puissance selon press mais pas angle (petit cercle brimstone pour la charge) 
-/ coup critique ? Flèche enflammée quand full charge avec du glow
-- ARC BANDE FLECHE QUAND RESTE APPUYED
+- Ejection du joueur (mettre les bumpx et bumpy + courbe cercle inversée pour les dégâts)
 
-- Ejection du joueur
+- Deuxième saut bugged
+
+- Fix trigger isRight/LeftBlocked qui peut empêcher de faire revenir sur le terrain
+
+- Empêcher de garder le tir chargé avant de mourir au respawn (reset animation + isCharging)
+
+- Spawn de joueur UI
+
+- Clic molette pour faire spawn et bouger un seul dummy ?
+
+- Changer taille de la map / trigger lorsque joueur en dehors de la cam ?
+
+- Flèches coup critique ? Flèche enflammée quand full charge avec du glow
+
+- Joueur invincible au spawn (GameManager : lorsque deux joueurs sont connectés -> respawn et attente 3 2 1)
+
+- Dash dans direction (invincible mais faut être grounded pour redash)
+
 - Différents skin et flèches selon le joueur 
-BUG FLECHE TRAVERSE LE SOL
+
+- Ne pas reset la position de l'arc lorsque le joueur lâche le joystick
 
 - Playsound avant ou après les autres appels de fonction ?
 
 - Animer double saut
+- Petite particule lorsque le joueur réussi son fast fall
 
 - UIManager (methodes pour modifier les elements)
 - SoundManager
-- Dash dans direction (invincible mais faut être grounded pour redash)
-
 - GameManager (spawns, lancement partie, fin partie)
 
 - Pouvoir s'accrocher aux rebords (collider sous les mains + reset le saut + (invulnérabilité et lock sinon rien))
@@ -21,15 +36,18 @@ BUG FLECHE TRAVERSE LE SOL
 - Walljumps
 - Ajouter friction pour les walljumps ?
 
-- Animation sortie d'écran ?
-- Ajout des ombres / glow / particules
-- Passer en 2.5D ?
-- Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
-
 - Système de headshot (*10 la puissance ?)
 
-- Debug le hasFell qui passe dans la boucle lors du saut
+- Optimiser les png en comme terrain.png
 
-MULTIPLAYER
+- Animation sortie d'écran ?
+- Ajout des ombres / glow / particules
+- Rajouter sons (bruit touche d'une flèche, bruit déplacement, flèches etc)
+
+- Système météo / journée qui passe (avec un slerp sur le soleil)
+
+- MULTIPLAYER
+
+- Passer en 2.5D ?
 
 https://youtu.be/3sWTzMsmdx8?t=61
