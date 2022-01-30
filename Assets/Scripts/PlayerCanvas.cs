@@ -40,7 +40,6 @@ public class PlayerCanvas : MonoBehaviour
                 health[i].gameObject.SetActive(false);
         }
     }
-
     public void SetWin(int _win)
     {
         wins.text = _win.ToString();

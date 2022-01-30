@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext _keyInput)
     {
-        if (!isDesactivated)
+        if (isDesactivated)
+            keyInput = Vector2.zero;
+        else
             keyInput = _keyInput.ReadValue<Vector2>();
     }
 
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
     public void SetDesactivateState(bool state, bool stopPlayer)
     {
         if (stopPlayer)
-            rigidBody.velocity = new Vector2(0f, 0f);
+            rigidBody.velocity = Vector2.zero;
         isDesactivated = state;
     }
 

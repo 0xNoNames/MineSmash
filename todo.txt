@@ -1,10 +1,12 @@
+- Fix les UI (gamemanager tout ça)
+- Fix le respawn
+- Fix le bump en Y
+
+- Courbe de charge exponentielle
+
 - Custom hit sound (selon le personnage / secret)
 
 - rajouter frames animation arc
-
-- Ejection du joueur (mettre les bumpx et bumpy + courbe cercle inversée pour les dégâts)
-
-- Deuxième saut bugged (améliorer short)
 
 - Dash dans direction (invincible mais faut être grounded pour redash)
 - Parry / shield ?

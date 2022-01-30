@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1522169497}
     m_Modifications:
+    - target: {fileID: 1424904713169465840, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Wins P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125904657522609, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 2 P3
+      objectReference: {fileID: 0}
     - target: {fileID: 2998125905144968002, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -225,6 +233,18 @@ PrefabInstance:
     - target: {fileID: 2998125905144968013, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905169953787, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 1 P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905810010794, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Percentage P3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125906166352003, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 3 P3
       objectReference: {fileID: 0}
     - target: {fileID: 6704065768528743214, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: percentage
@@ -1548,6 +1568,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1522169497}
     m_Modifications:
+    - target: {fileID: 1424904713169465840, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Wins P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125904657522609, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 2 P4
+      objectReference: {fileID: 0}
     - target: {fileID: 2998125905144968002, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1643,6 +1671,18 @@ PrefabInstance:
     - target: {fileID: 2998125905144968013, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905169953787, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 1 P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905810010794, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Percentage P4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125906166352003, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 3 P4
       objectReference: {fileID: 0}
     - target: {fileID: 6704065768528743214, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: percentage
@@ -1805,6 +1845,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1522169497}
     m_Modifications:
+    - target: {fileID: 1424904713169465840, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Wins P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125904657522609, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 2 P2
+      objectReference: {fileID: 0}
     - target: {fileID: 2998125905144968002, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1900,6 +1948,18 @@ PrefabInstance:
     - target: {fileID: 2998125905144968013, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905169953787, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 1 P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905810010794, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Percentage P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125906166352003, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 3 P2
       objectReference: {fileID: 0}
     - target: {fileID: 6704065768528743214, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: percentage
@@ -3303,6 +3363,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1522169497}
     m_Modifications:
+    - target: {fileID: 1424904713169465840, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Wins P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125904657522609, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 2 P1
+      objectReference: {fileID: 0}
     - target: {fileID: 2998125905144968002, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3394,6 +3462,18 @@ PrefabInstance:
     - target: {fileID: 2998125905144968003, guid: cb909b787e9080f49abe14f61568293f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905169953787, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 1 P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125905810010794, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Percentage P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2998125906166352003, guid: cb909b787e9080f49abe14f61568293f, type: 3}
+      propertyPath: m_Name
+      value: Health 3 P1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb909b787e9080f49abe14f61568293f, type: 3}

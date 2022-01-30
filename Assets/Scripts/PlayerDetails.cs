@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerDetails : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigidBody;
-    [SerializeField] private PlayerController playerController;
     [SerializeField] private Animator animator;
     [SerializeField] private BumpSystem bumpSystem;
 
@@ -13,6 +12,10 @@ public class PlayerDetails : MonoBehaviour
     [SerializeField] private AudioClip[] hitClips;
 
     [SerializeField] private float maxPercentage = 999.9f;
+
+    private bool isDead;
+
+    public PlayerController playerController;
 
     public int playerID;
     public string playerName;
@@ -42,38 +45,45 @@ public class PlayerDetails : MonoBehaviour
         playerName = "Joueur " + (_playerID + 1);
     }
 
-    public void Death()
+    public void RemoveArrows()
     {
         // Suppression des flèches plantées dans le joueur
         for (int i = 1; i < transform.childCount; i++)
             GameObject.Destroy(transform.GetChild(i).gameObject);
+    }
 
-        StopCoroutine("RespawnAnimation");
-        StartCoroutine("RespawnAnimation");
+    public void Death()
+    {
+        if (isDead)
+            return;
 
+        print("Dead");
+
+        isDead = true;
         currentHealth -= 1;
-        currentPercentage = 0f;
-
-        UIManager.Instance.getPlayerUI(playerID).SetPercentage(currentPercentage);
-        UIManager.Instance.getPlayerUI(playerID).SetHealth(currentHealth);
-
-        // Réinitialisation de la variable de bump
-        bumpSystem.value = Vector2.zero;
 
         // Appel de la fonction GameOver lorsque le joueur n'a plus de vies
         if (currentHealth == 0)
         {
-            if (GameManager.Instance.playerList.Count > 1)
-            {
-                if (playerID == 0)
-                    GameManager.Instance.getPlayerDetails(1).wins += 1;
-                else
-                    GameManager.Instance.getPlayerDetails(0).wins += 1;
-                GameManager.Instance.GameOver();
-            }
-            else
-                GameManager.Instance.RestartGame();
+            GameManager.Instance.GameOver(this);
+            RemoveArrows();
+            isDead = false;
+            return;
         }
+
+        isDead = false;
+        transform.position = playerSpawn;
+
+        StopCoroutine("RespawnAnimation");
+        StartCoroutine("RespawnAnimation");
+
+        RemoveArrows();
+
+        UIManager.Instance.getPlayerUI(playerID).SetHealth(currentHealth);
+        UIManager.Instance.getPlayerUI(playerID).SetPercentage(0f);
+
+        // Réinitialisation de la variable de bump
+        bumpSystem.value = Vector2.zero;
     }
 
     public void Hit(Vector2 arrowVelocity)
@@ -86,12 +96,14 @@ public class PlayerDetails : MonoBehaviour
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
 
-        // Etourdi le joueur pendant x secondes selon son pourcentage
-        StopCoroutine("DamagedStun");
-        StartCoroutine(DamagedStun(currentPercentage / 500));
-
         // Ajout du bump de la flèche au joueur
-        bumpSystem.value = arrowVelocity * (currentPercentage / 100);
+        Vector2 arrowDamage = arrowVelocity * (currentPercentage / 100);
+
+        bumpSystem.value = arrowDamage;
+
+        // Etourdi le joueur pendant x secondes selon son pourcentage et les dégâts de la flèche
+        StopCoroutine("DamagedStun");
+        StartCoroutine(DamagedStun(arrowDamage.magnitude / 500));
 
         currentPercentage += arrowVelocity.magnitude * 0.37f;
 
@@ -120,23 +132,26 @@ public class PlayerDetails : MonoBehaviour
     private IEnumerator RespawnAnimation()
     {
         playerController.SetDesactivateState(true, true);
-
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
         isInvicible = true;
-
-        transform.position = playerSpawn;
 
         yield return new WaitForSeconds(1f);
 
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
-
         playerController.SetDesactivateState(false, false);
 
         yield return new WaitForSeconds(2.5f);
 
         isInvicible = false;
         animator.SetBool("isInvincible", false);
+    }
+
+    public void ResetPlayer()
+    {
+        transform.position = playerSpawn;
+        currentHealth = maxHealth;
+        rigidBody.velocity = Vector2.zero;
     }
 }

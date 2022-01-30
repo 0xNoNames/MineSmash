@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,34 +29,37 @@ public class GameManager : MonoBehaviour
         return playerList[p];
     }
 
-    public void RestartGame()
+    public IEnumerator RestartGame()
     {
         foreach (PlayerDetails player in playerList)
         {
             player.Spawn();
+
+            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
             UIManager.Instance.getPlayerUI(player.playerID).SetHealth(player.maxHealth);
-            player.GetComponent<Rigidbody2D>().isKinematic = false;
-            player.GetComponent<PlayerController>().SetDesactivateState(false, false);
+
+
+            yield return new WaitForSeconds(1f);
+
+            player.playerController.SetDesactivateState(false, false);
         }
     }
-
-    public void GameOver()
+    public void GameOver(PlayerDetails _player)
     {
         //List<int> playerHealths = new List<int>();
 
-        if (playerList.Count <= 1)
-            return;
-
         foreach (PlayerDetails player in playerList)
         {
-            player.GetComponent<Rigidbody2D>().isKinematic = true;
-            player.GetComponent<PlayerController>().SetDesactivateState(true, true);
+            player.playerController.SetDesactivateState(true, true);
 
-            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
+            _player.ResetPlayer();
 
             if (player.currentHealth > 0)
                 UIManager.Instance.getPlayerUI(player.playerID).SetWin(player.wins);
         }
-        RestartGame();
+
+        StopCoroutine("RestartGame");
+        StartCoroutine("RestartGame");
     }
+
 }
