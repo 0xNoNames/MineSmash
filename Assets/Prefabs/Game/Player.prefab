@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2243076222259932719}
   - component: {fileID: 2243076222259932718}
   - component: {fileID: 2243076222259932724}
+  - component: {fileID: 466188639285774558}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -203,6 +204,7 @@ MonoBehaviour:
   rigidBody: {fileID: 2243076222259932716}
   playerController: {fileID: 2243076222259932717}
   animator: {fileID: 2243076222259932719}
+  bumpSystem: {fileID: 466188639285774558}
   source: {fileID: 2243076222259932715}
   hitClips:
   - {fileID: 8300000, guid: 8a107cf1f365fd440b9e9a14967a021c, type: 3}
@@ -213,10 +215,10 @@ MonoBehaviour:
   playerName: 
   playerSpawn: {x: 0, y: 0}
   wins: 0
-  isInvicible: 0
   maxHealth: 3
   currentHealth: 0
   currentPercentage: 0
+  isInvicible: 0
 --- !u!114 &2243076222259932717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +238,7 @@ MonoBehaviour:
     m_Bits: 1
   rigidBody: {fileID: 2243076222259932716}
   spriteRenderer: {fileID: 2243076222259932706}
+  bumpSystem: {fileID: 466188639285774558}
   moveSpeed: 350
   jumpHeight: 25
   secondJumpRatio: 0.9
@@ -477,11 +480,40 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d4ab881e-ac52-4093-96d8-7fc98f423a95
     m_ActionName: Player/Dash[/XInputControllerWindows/leftTrigger,/Keyboard/leftShift,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2243076222259932717}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Debug
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 098ade9c-016d-414c-ab75-0b58a690cd06
+    m_ActionName: Player/Debug[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &466188639285774558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2243076222259932705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdf50a2c37019349800f8ab7ed1e452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bump: {x: 0, y: 0}
 --- !u!1 &2243076223651030916
 GameObject:
   m_ObjectHideFlags: 0

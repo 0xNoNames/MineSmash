@@ -8,13 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask collisionLayer;
     [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private BumpSystem bumpSystem;
 
     [SerializeField] private float moveSpeed = 300f;
     [SerializeField] private float jumpHeight = 20f;
     [SerializeField] private float secondJumpRatio = 0.75f;
     [SerializeField] private int maxJumps = 2;
 
-    public Vector2 bump;
+    private float horizontalVelocity;
 
     private Vector2 keyInput;
     private int jumpCount;
@@ -39,14 +40,26 @@ public class PlayerController : MonoBehaviour
             isFirstJump = true;
         }
 
-        if (keyInput.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded)
+        if (keyInput.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded && bumpSystem.bump == Vector2.zero)
             FastFall();
 
-        float horizontalMovement = keyInput.x * moveSpeed * Time.fixedDeltaTime;
+        float horizontalVelocity = keyInput.x * moveSpeed * Time.fixedDeltaTime;
 
-        rigidBody.velocity = new Vector2(horizontalMovement + bump.x, rigidBody.velocity.y);
+        //if (bumpSystem.bump.y < -0.5f || bumpSystem.bump.y > 0.5f)
+        //    rigidBody.velocity.Set(horizontalVelocity, bumpSystem.bump.y);
+        //else
+        //    rigidBody.velocity = new Vector2(horizontalVelocity + bumpSystem.bump.x, rigidBody.velocity.y);
+
+        rigidBody.velocity = new Vector2(horizontalVelocity, rigidBody.velocity.y);
+
 
         Flip(rigidBody.velocity.x);
+    }
+
+    public void Debug(InputAction.CallbackContext _keyInput)
+    {
+        if (_keyInput.performed)
+            bumpSystem.bump = new Vector2(0, 20f);
     }
 
     public void Move(InputAction.CallbackContext _keyInput)
@@ -56,10 +69,10 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext keyInput)
     {
-        if (isDesactivated)
+        if (isDesactivated && bumpSystem.bump != Vector2.zero)
             return;
 
-        // Deuxi�me saut
+        // Deuxieme saut
         if (keyInput.started && !isGrounded && jumpCount > 1)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight * secondJumpRatio);
