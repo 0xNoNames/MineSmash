@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float secondJumpRatio = 0.75f;
     [SerializeField] private int maxJumps = 2;
 
-    private float horizontalVelocity;
-
     private Vector2 keyInput;
     private int jumpCount;
     private bool isDesactivated;
@@ -26,12 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDesactivated)
-            return;
-
         isGrounded = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
-        //isLeftBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer);
-        //isRightBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer);
 
         if (isGrounded)
         {
@@ -40,18 +33,22 @@ public class PlayerController : MonoBehaviour
             isFirstJump = true;
         }
 
-        if (keyInput.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded && bumpSystem.bump == Vector2.zero)
+        if (keyInput.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded && bumpSystem.value == Vector2.zero)
             FastFall();
 
         float horizontalVelocity = keyInput.x * moveSpeed * Time.fixedDeltaTime;
+        float verticalVelocity = keyInput.y * moveSpeed * Time.fixedDeltaTime;
 
-        //if (bumpSystem.bump.y < -0.5f || bumpSystem.bump.y > 0.5f)
-        //    rigidBody.velocity.Set(horizontalVelocity, bumpSystem.bump.y);
-        //else
-        //    rigidBody.velocity = new Vector2(horizontalVelocity + bumpSystem.bump.x, rigidBody.velocity.y);
+        if (Mathf.Abs(bumpSystem.value.x) > 0)
+            horizontalVelocity /= 2;
 
-        rigidBody.velocity = new Vector2(horizontalVelocity, rigidBody.velocity.y);
+        rigidBody.velocity = new Vector2(horizontalVelocity + bumpSystem.value.x, rigidBody.velocity.y + bumpSystem.value.y);
 
+        if (Mathf.Abs(bumpSystem.value.y) > 0)
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, verticalVelocity + bumpSystem.value.y);
+
+        if (Mathf.Abs(bumpSystem.value.x) - Mathf.Abs(horizontalVelocity) <= 0)
+            bumpSystem.value.x = 0;
 
         Flip(rigidBody.velocity.x);
     }
@@ -59,17 +56,18 @@ public class PlayerController : MonoBehaviour
     public void Debug(InputAction.CallbackContext _keyInput)
     {
         if (_keyInput.performed)
-            bumpSystem.bump = new Vector2(0, 20f);
+            bumpSystem.value = new Vector2(0, 20f);
     }
 
     public void Move(InputAction.CallbackContext _keyInput)
     {
-        keyInput = _keyInput.ReadValue<Vector2>();
+        if (!isDesactivated)
+            keyInput = _keyInput.ReadValue<Vector2>();
     }
 
     public void Jump(InputAction.CallbackContext keyInput)
     {
-        if (isDesactivated && bumpSystem.bump != Vector2.zero)
+        if (isDesactivated && bumpSystem.value != Vector2.zero)
             return;
 
         // Deuxieme saut
@@ -98,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void FastFall()
     {
-        if (!isGrounded && !isFastFalling)
+        if (!isGrounded && !isFastFalling && !isDesactivated)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, -jumpHeight);
             isFastFalling = true;

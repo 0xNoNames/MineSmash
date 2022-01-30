@@ -12,6 +12,8 @@ public class PlayerDetails : MonoBehaviour
     [SerializeField] private AudioSource source;
     [SerializeField] private AudioClip[] hitClips;
 
+    [SerializeField] private float maxPercentage = 999.9f;
+
     public int playerID;
     public string playerName;
     public Vector2 playerSpawn;
@@ -56,7 +58,7 @@ public class PlayerDetails : MonoBehaviour
         UIManager.Instance.getPlayerUI(playerID).SetHealth(currentHealth);
 
         // Réinitialisation de la variable de bump
-        bumpSystem.bump = Vector2.zero;
+        bumpSystem.value = Vector2.zero;
 
         // Appel de la fonction GameOver lorsque le joueur n'a plus de vies
         if (currentHealth == 0)
@@ -68,7 +70,6 @@ public class PlayerDetails : MonoBehaviour
                 else
                     GameManager.Instance.getPlayerDetails(0).wins += 1;
                 GameManager.Instance.GameOver();
-
             }
             else
                 GameManager.Instance.RestartGame();
@@ -86,27 +87,26 @@ public class PlayerDetails : MonoBehaviour
         StartCoroutine("DamagedAnimation");
 
         // Etourdi le joueur pendant x secondes selon son pourcentage
-        //StopCoroutine("DamagedStun");
-        //StartCoroutine(DamagedStun(currentPercentage / 500));
-
+        StopCoroutine("DamagedStun");
+        StartCoroutine(DamagedStun(currentPercentage / 500));
 
         // Ajout du bump de la flèche au joueur
-        bumpSystem.bump = arrowVelocity * (currentPercentage / 200);
+        bumpSystem.value = arrowVelocity * (currentPercentage / 100);
 
         currentPercentage += arrowVelocity.magnitude * 0.37f;
 
-        if (currentPercentage > 999.9f)
-            currentPercentage = 999.9f;
+        if (currentPercentage > maxPercentage)
+            currentPercentage = maxPercentage;
 
         UIManager.Instance.getPlayerUI(playerID).SetPercentage(currentPercentage);
     }
 
-    //private IEnumerator DamagedStun(float seconds)
-    //{
-    //    playerController.SetDesactivateState(true, false);
-    //    yield return new WaitForSeconds(seconds);
-    //    playerController.SetDesactivateState(false, false);
-    //}
+    private IEnumerator DamagedStun(float seconds)
+    {
+        playerController.SetDesactivateState(true, false);
+        yield return new WaitForSeconds(seconds);
+        playerController.SetDesactivateState(false, false);
+    }
 
     private IEnumerator DamagedAnimation()
     {

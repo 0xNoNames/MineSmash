@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class BumpSystem : MonoBehaviour
 {
-    public Vector2 bump;
+    public Vector2 value;
 
     private void FixedUpdate()
     {
-        bump.x = Mathf.Lerp(bump.x, 0, Time.fixedDeltaTime * 10f);
-        bump.y = Mathf.Lerp(bump.y, 0, Time.fixedDeltaTime * 10f);
+        value.x = Mathf.Lerp(value.x, 0, Time.fixedDeltaTime * 3f);
+        value.y = Mathf.Lerp(value.y, 0, Time.fixedDeltaTime * 10f);
+
+        if (Mathf.Abs(value.x) < 0.1)
+            value.x = 0;
+
+        if (Mathf.Abs(value.y) < 1.75)
+            value.y = 0;
     }
 }

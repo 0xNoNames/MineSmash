@@ -23,14 +23,6 @@ public class DummyDetails : MonoBehaviour
         currentPercentageUI = GameObject.FindGameObjectWithTag("DummyPercentage");
     }
 
-    //private void Update()
-    //{
-    //    if ("H")
-    //        currentPercentage += 5;
-    //    if ("K")
-    //        Death();
-    //}
-
     public void Death()
     {
         StopCoroutine("RespawnAnimation");
@@ -46,8 +38,6 @@ public class DummyDetails : MonoBehaviour
 
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
-
-        // Punched selon vecteur Fl�che, vecteur Joueur et pourcentage Joueur 
 
         if (currentPercentage < 999.9f)
         {
