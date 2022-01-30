@@ -13,7 +13,6 @@ public class PlayerDetails : MonoBehaviour
 
     [SerializeField] private float maxPercentage = 999.9f;
 
-    private bool isDead;
 
     public PlayerController playerController;
 
@@ -26,6 +25,7 @@ public class PlayerDetails : MonoBehaviour
     public float currentPercentage;
 
     public bool isInvicible;
+    public bool isDead;
 
     private void Start()
     {
@@ -57,22 +57,16 @@ public class PlayerDetails : MonoBehaviour
         if (isDead)
             return;
 
-        print("Dead");
-
         isDead = true;
         currentHealth -= 1;
 
         // Appel de la fonction GameOver lorsque le joueur n'a plus de vies
         if (currentHealth == 0)
         {
-            GameManager.Instance.GameOver(this);
+            GameManager.Instance.GameOver();
             RemoveArrows();
-            isDead = false;
             return;
         }
-
-        isDead = false;
-        transform.position = playerSpawn;
 
         StopCoroutine("RespawnAnimation");
         StartCoroutine("RespawnAnimation");
@@ -115,9 +109,9 @@ public class PlayerDetails : MonoBehaviour
 
     private IEnumerator DamagedStun(float seconds)
     {
-        playerController.SetDesactivateState(true, false);
+        playerController.SetDesactivateState(true);
         yield return new WaitForSeconds(seconds);
-        playerController.SetDesactivateState(false, false);
+        playerController.SetDesactivateState(false);
     }
 
     private IEnumerator DamagedAnimation()
@@ -131,16 +125,20 @@ public class PlayerDetails : MonoBehaviour
 
     private IEnumerator RespawnAnimation()
     {
-        playerController.SetDesactivateState(true, true);
+        transform.position = playerSpawn;
+
+        playerController.SetDesactivateState(true);
+        rigidBody.velocity = Vector2.zero;
         animator.SetBool("isInvincible", false);
         animator.SetBool("isDead", true);
         isInvicible = true;
 
         yield return new WaitForSeconds(1f);
 
+        isDead = false;
         animator.SetBool("isDead", false);
         animator.SetBool("isInvincible", true);
-        playerController.SetDesactivateState(false, false);
+        playerController.SetDesactivateState(false);
 
         yield return new WaitForSeconds(2.5f);
 

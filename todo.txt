@@ -1,5 +1,4 @@
-- Fix les UI (gamemanager tout ça)
-- Fix le respawn
+- Fix le déplacement lors du respawn (si le joueur reste appuyé sur gauche ou droit en mourrant il se déplace après)
 - Fix le bump en Y
 
 - Courbe de charge exponentielle

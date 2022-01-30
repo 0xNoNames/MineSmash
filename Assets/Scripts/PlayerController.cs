@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDesactivated)
+            return;
+
         isGrounded = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
 
         if (isGrounded)
@@ -61,15 +64,12 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext _keyInput)
     {
-        if (isDesactivated)
-            keyInput = Vector2.zero;
-        else
-            keyInput = _keyInput.ReadValue<Vector2>();
+        keyInput = _keyInput.ReadValue<Vector2>();
     }
 
     public void Jump(InputAction.CallbackContext keyInput)
     {
-        if (isDesactivated && bumpSystem.value != Vector2.zero)
+        if (bumpSystem.value != Vector2.zero)
             return;
 
         // Deuxieme saut
@@ -105,10 +105,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetDesactivateState(bool state, bool stopPlayer)
+    public void SetDesactivateState(bool state)
     {
-        if (stopPlayer)
-            rigidBody.velocity = Vector2.zero;
         isDesactivated = state;
     }
 

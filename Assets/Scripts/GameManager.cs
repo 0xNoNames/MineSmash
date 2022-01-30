@@ -35,27 +35,30 @@ public class GameManager : MonoBehaviour
         {
             player.Spawn();
 
-            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
-            UIManager.Instance.getPlayerUI(player.playerID).SetHealth(player.maxHealth);
-
-
             yield return new WaitForSeconds(1f);
 
-            player.playerController.SetDesactivateState(false, false);
+            player.isDead = false;
+            player.playerController.SetDesactivateState(false);
         }
     }
-    public void GameOver(PlayerDetails _player)
+    public void GameOver()
     {
         //List<int> playerHealths = new List<int>();
 
         foreach (PlayerDetails player in playerList)
         {
-            player.playerController.SetDesactivateState(true, true);
+            player.playerController.SetDesactivateState(true);
 
-            _player.ResetPlayer();
+            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
+            UIManager.Instance.getPlayerUI(player.playerID).SetHealth(player.maxHealth);
 
             if (player.currentHealth > 0)
+            {
+                player.wins += 1;
                 UIManager.Instance.getPlayerUI(player.playerID).SetWin(player.wins);
+            }
+
+            player.ResetPlayer();
         }
 
         StopCoroutine("RestartGame");
