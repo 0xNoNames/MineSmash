@@ -31,14 +31,14 @@ public class ArrowDetails : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        // Si la flèche touche un environnement solide 
+        // Si la flï¿½che touche un environnement solide 
         if (hitInfo.tag == "Solid")
         {
             source.PlayOneShot(missClip[Random.Range(0, missClip.Length)], 0.25f);
             StopAndDestroy();
         }
 
-        // Si la flèche touche un joueur
+        // Si la flï¿½che touche un joueur
         else if (hitInfo.tag == "Player")
         {
             PlayerDetails touchedPlayer = hitInfo.GetComponent<PlayerDetails>();
@@ -46,13 +46,13 @@ public class ArrowDetails : MonoBehaviour
             if (touchedPlayer != shootingPlayer && !touchedPlayer.isInvicible)
             {
                 StopAndDestroy();
-                // Plante la flèche dans le joueur
+                // Plante la flï¿½che dans le joueur
                 transform.parent = hitInfo.transform;
                 touchedPlayer.Hit(rigidBody.velocity);
             }
         }
 
-        // Si la flèche touche un mannequin
+        // Si la flï¿½che touche un mannequin
         else if (hitInfo.tag == "Dummy")
         {
             DummyDetails touchedDummy = hitInfo.GetComponent<DummyDetails>();
@@ -61,7 +61,7 @@ public class ArrowDetails : MonoBehaviour
             {
                 StopAndDestroy();
 
-                // Plante la flèche dans le dummy
+                // Plante la flï¿½che dans le dummy
                 transform.parent = hitInfo.transform;
                 //touchedDummy.Hit(rigidBody.velocity);
             }

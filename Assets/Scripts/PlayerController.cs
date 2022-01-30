@@ -11,16 +11,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 300f;
     [SerializeField] private float jumpHeight = 20f;
-    [SerializeField] private float secondJumpRatio = 1.25f;
+    [SerializeField] private float secondJumpRatio = 0.75f;
     [SerializeField] private int maxJumps = 2;
 
-    private Vector2 inputMove;
+    public Vector2 bump;
+
+    private Vector2 keyInput;
     private int jumpCount;
     private bool isDesactivated;
-    private bool isLeftBlocked;
-    private bool isRightBlocked;
     private bool isGrounded;
     private bool isFastFalling;
+    private bool isFirstJump;
 
     private void FixedUpdate()
     {
@@ -28,65 +29,55 @@ public class PlayerController : MonoBehaviour
             return;
 
         isGrounded = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.down, .1f, collisionLayer);
-        isLeftBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer);
-        isRightBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer);
+        //isLeftBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.left, .1f, collisionLayer);
+        //isRightBlocked = Physics2D.BoxCast(narrowBodyCollider.bounds.center, narrowBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer) || Physics2D.BoxCast(wideBodyCollider.bounds.center, wideBodyCollider.bounds.size, 0f, Vector2.right, .1f, collisionLayer);
 
         if (isGrounded)
         {
             jumpCount = maxJumps;
             isFastFalling = false;
+            isFirstJump = true;
         }
 
-        if (inputMove.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded)
+        if (keyInput.y < -0.5 && rigidBody.velocity.y <= 0 && !isGrounded)
             FastFall();
 
-        float horizontalMovement = inputMove.x * moveSpeed * Time.fixedDeltaTime;
+        float horizontalMovement = keyInput.x * moveSpeed * Time.fixedDeltaTime;
 
-        //rigidBody.velocity = new Vector2(horizontalMovement, rigidBody.velocity.y);
-
-        //if (!isGrounded)
-        //{
-        //    rigidBody.AddForce(new Vector2(horizontalMovement / 10f, 0f), ForceMode2D.Impulse);
-        //}
-        //else
-        //{
-        if (!isLeftBlocked && horizontalMovement < 0 || !isRightBlocked && horizontalMovement > 0)
-            rigidBody.velocity = new Vector2(horizontalMovement, rigidBody.velocity.y);
-        else
-            rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
-        //}
+        rigidBody.velocity = new Vector2(horizontalMovement + bump.x, rigidBody.velocity.y);
 
         Flip(rigidBody.velocity.x);
     }
 
-    public void Move(InputAction.CallbackContext keyPress)
+    public void Move(InputAction.CallbackContext _keyInput)
     {
-        inputMove = keyPress.ReadValue<Vector2>();
+        keyInput = _keyInput.ReadValue<Vector2>();
     }
 
-    public void Jump(InputAction.CallbackContext keyPress)
+    public void Jump(InputAction.CallbackContext keyInput)
     {
         if (isDesactivated)
             return;
 
-        // Deuxième saut
-        if (keyPress.started && !isGrounded && jumpCount > 1)
+        // Deuxiï¿½me saut
+        if (keyInput.started && !isGrounded && jumpCount > 1)
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight / secondJumpRatio);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight * secondJumpRatio);
             jumpCount--;
             return;
         }
 
         // Fait sauter le joueur
-        if (keyPress.started && isGrounded)
+        if (keyInput.started && isGrounded)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
         }
 
         // Fait redescendre le joueur pour la hauteur selon le temps d'appui
-        if (keyPress.canceled && rigidBody.velocity.y > 0f)
+        if (keyInput.canceled && rigidBody.velocity.y > 0f && isFirstJump)
         {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * 0.5f);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * 0.25f);
+            isFirstJump = false;
         }
 
         isFastFalling = false;
@@ -116,12 +107,8 @@ public class PlayerController : MonoBehaviour
     void Flip(float _velocity)
     {
         if (_velocity > 0.1f)
-        {
             spriteRenderer.flipX = true;
-        }
         else if (_velocity < -0.1f)
-        {
             spriteRenderer.flipX = false;
-        }
     }
 }

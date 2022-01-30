@@ -210,7 +210,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
   - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
   playerID: 0
+  playerName: 
   playerSpawn: {x: 0, y: 0}
+  wins: 0
   isInvicible: 0
   maxHealth: 3
   currentHealth: 0
@@ -234,9 +236,9 @@ MonoBehaviour:
     m_Bits: 1
   rigidBody: {fileID: 2243076222259932716}
   spriteRenderer: {fileID: 2243076222259932706}
-  moveSpeed: 300
-  jumpHeight: 20
-  secondJumpRatio: 1.25
+  moveSpeed: 350
+  jumpHeight: 25
+  secondJumpRatio: 0.9
   maxJumps: 2
 --- !u!50 &2243076222259932716
 Rigidbody2D:
@@ -253,7 +255,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 8
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -472,21 +474,9 @@ MonoBehaviour:
     m_ActionId: f8b19fc6-db1d-48af-94c9-b60ae7cc40b2
     m_ActionName: UI/RightClick[/Mouse/rightButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2243076222259932717}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 321736b3-4fbf-4d22-ac14-ff81d3bc99f1
-    m_ActionName: Player/Start[/Keyboard/enter,/Keyboard/space]
+      m_Calls: []
+    m_ActionId: d4ab881e-ac52-4093-96d8-7fc98f423a95
+    m_ActionName: Player/Dash[/XInputControllerWindows/leftTrigger,/Keyboard/leftShift,/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

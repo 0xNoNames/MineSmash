@@ -47,7 +47,7 @@ public class DummyDetails : MonoBehaviour
         StopCoroutine("DamagedAnimation");
         StartCoroutine("DamagedAnimation");
 
-        // Punched selon vecteur Flèche, vecteur Joueur et pourcentage Joueur 
+        // Punched selon vecteur Flï¿½che, vecteur Joueur et pourcentage Joueur 
 
         if (currentPercentage < 999.9f)
         {

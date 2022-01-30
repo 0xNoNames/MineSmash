@@ -23,20 +23,39 @@ public class GameManager : MonoBehaviour
             _instance = this;
     }
 
+    public PlayerDetails getPlayerDetails(int p)
+    {
+        return playerList[p];
+    }
+
     public void RestartGame()
     {
         foreach (PlayerDetails player in playerList)
         {
             player.Spawn();
+            UIManager.Instance.getPlayerUI(player.playerID).SetHealth(player.maxHealth);
+            player.GetComponent<Rigidbody2D>().isKinematic = false;
+            player.GetComponent<PlayerController>().SetDesactivateState(false, false);
         }
     }
 
-    public void GameOver(PlayerDetails winner, PlayerDetails looser)
+    public void GameOver()
     {
-        winner.GetComponent<Rigidbody2D>().isKinematic = true;
-        looser.GetComponent<Rigidbody2D>().isKinematic = true;
+        //List<int> playerHealths = new List<int>();
 
-        // Ajouter +1 sur le nombre de win au winner
+        if (playerList.Count <= 1)
+            return;
+
+        foreach (PlayerDetails player in playerList)
+        {
+            player.GetComponent<Rigidbody2D>().isKinematic = true;
+            player.GetComponent<PlayerController>().SetDesactivateState(true, true);
+
+            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
+
+            if (player.currentHealth > 0)
+                UIManager.Instance.getPlayerUI(player.playerID).SetWin(player.wins);
+        }
         RestartGame();
     }
 }

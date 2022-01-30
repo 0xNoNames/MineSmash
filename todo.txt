@@ -1,35 +1,34 @@
+- Custom hit sound (selon le personnage / secret)
+
+- rajouter frames animation arc
+
 - Ejection du joueur (mettre les bumpx et bumpy + courbe cercle inversée pour les dégâts)
-
-- Changer touche de saut manette
-
-- Mettre la tête du perso dans l'ui (pour identifier) (p'tet un petit draw autout du skin de la même couleur que l'ui)
-- Afficher nom du joueur au dessu de celui-ci (en petit)
-
-- Différents skin et flèches selon le joueur 
 
 - Deuxième saut bugged (améliorer short)
 
+- Dash dans direction (invincible mais faut être grounded pour redash)
+- Parry / shield ?
+- WaveDash ?
+
 - Bander l'arc seulement lorsqu'il peut tirer
-
-- Fix trigger isRight/LeftBlocked qui peut empêcher de faire revenir sur le terrain
-
 - Empêcher de garder le tir chargé avant de mourir au respawn (reset animation + isCharging)
 
-- Spawn de joueur UI (plus de 3 joueurs)
+- Différents skin et flèches selon le joueur 
+
+- Joueur invincible au spawn (GameManager : lorsque deux joueurs sont connectés -> respawn et attente 3 2 1)
+
+- Gérer l'ajout de victoires quand plus de 2 joueurs
+- Mettre la tête du perso dans l'ui (pour identifier) (p'tet un petit draw autout du skin de la même couleur que l'ui)
+- Afficher nom du joueur au dessu de celui-ci (en petit)
 
 - Clic molette pour faire spawn et bouger un seul dummy ?
 
 - Flèches coup critique ? Flèche enflammée quand full charge avec du glow
 
-- Joueur invincible au spawn (GameManager : lorsque deux joueurs sont connectés -> respawn et attente 3 2 1)
-
-- Dash dans direction (invincible mais faut être grounded pour redash)
-- WaveDash ?
-
-- Ne pas reset la position de l'arc lorsque le joueur lâche le joystick
-
 - Animer double saut
 - Petite particule lorsque le joueur réussi son fast fall
+
+- Cercle brimstone pour charger le tir
 
 - UIManager (methodes pour modifier les elements) (ajouter UI "PRESS ANY KEY/START" to join en opacity .5 et clignote)
 - SoundManager
@@ -54,8 +53,8 @@
 
 - Système météo / journée qui passe (avec un slerp sur le soleil)
 
-- MULTIPLAYER
+- Rajouter des personnages jouables (genre loup plus rapide mais fait moins mal)
 
-- Passer en 2.5D ?
+- MULTIPLAYER
 
 https://youtu.be/3sWTzMsmdx8?t=61

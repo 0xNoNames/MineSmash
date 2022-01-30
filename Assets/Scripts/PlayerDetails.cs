@@ -12,13 +12,14 @@ public class PlayerDetails : MonoBehaviour
     [SerializeField] private AudioClip[] hitClips;
 
     public int playerID;
+    public string playerName;
     public Vector2 playerSpawn;
-
-    public bool isInvicible;
-
+    public int wins;
     public int maxHealth = 3;
     public int currentHealth;
     public float currentPercentage;
+
+    public bool isInvicible;
 
     private void Start()
     {
@@ -35,30 +36,38 @@ public class PlayerDetails : MonoBehaviour
     {
         playerID = _playerID;
         playerSpawn = _playerSpawn;
+        playerName = "Joueur " + (_playerID + 1);
     }
 
     public void Death()
     {
+        // Suppression des flèches plantées dans le joueur
+        for (int i = 1; i < transform.childCount; i++)
+            GameObject.Destroy(transform.GetChild(i).gameObject);
+
         StopCoroutine("RespawnAnimation");
         StartCoroutine("RespawnAnimation");
 
         currentHealth -= 1;
         currentPercentage = 0f;
 
-        UIManager.Instance.getPlayerUI(playerID - 1).percentage.text = currentPercentage.ToString("0.0") + "%";
-        UIManager.Instance.getPlayerUI(playerID - 1).percentage.color = new Color(1, 1, 1);
+        UIManager.Instance.getPlayerUI(playerID).SetPercentage(currentPercentage);
 
-        // Suppression des fl�ches plant�s dans le joueur
-        for (int i = 1; i < transform.childCount; i++)
-            GameObject.Destroy(transform.GetChild(i).gameObject);
+        UIManager.Instance.getPlayerUI(playerID).SetHealth(currentHealth);
 
-
-        for (int i = 0; i < UIManager.Instance.getPlayerUI(playerID - 1).health.Length; i++)
+        if (currentHealth == 0)
         {
-            if (currentHealth > i)
-                UIManager.Instance.getPlayerUI(playerID - 1).health[i].gameObject.SetActive(true);
+            if (GameManager.Instance.playerList.Count > 1)
+            {
+                if (playerID == 0)
+                    GameManager.Instance.getPlayerDetails(1).wins += 1;
+                else
+                    GameManager.Instance.getPlayerDetails(0).wins += 1;
+                GameManager.Instance.GameOver();
+
+            }
             else
-                UIManager.Instance.getPlayerUI(playerID - 1).health[i].gameObject.SetActive(false);
+                GameManager.Instance.RestartGame();
         }
     }
 
@@ -76,16 +85,18 @@ public class PlayerDetails : MonoBehaviour
         StopCoroutine("DamagedStun");
         StartCoroutine(DamagedStun(currentPercentage / 500));
 
-        rigidBody.AddForce(arrowVelocity * currentPercentage);
+
+        // Ajout du bump de la flèche au joueur
+        playerController.bump = arrowVelocity;
+
+        //rigidBody.AddForce(arrowVelocity * currentPercentage);
 
         currentPercentage += arrowVelocity.magnitude * 0.37f;
 
         if (currentPercentage > 999.9f)
             currentPercentage = 999.9f;
 
-        float delta = currentPercentage / 150;
-        UIManager.Instance.getPlayerUI(playerID - 1).percentage.text = currentPercentage.ToString("0.0") + "%";
-        UIManager.Instance.getPlayerUI(playerID - 1).percentage.color = new Color(1, 1 - delta, 1 - delta);
+        UIManager.Instance.getPlayerUI(playerID).SetPercentage(currentPercentage);
     }
 
     private IEnumerator DamagedStun(float seconds)
@@ -103,11 +114,6 @@ public class PlayerDetails : MonoBehaviour
         isInvicible = false;
         animator.SetBool("isDamaged", false);
     }
-
-    //private IEnumerator SpawnAnimation()
-    //{
-    //    yield return new WaitForSeconds(1f);
-    //}
 
     private IEnumerator RespawnAnimation()
     {

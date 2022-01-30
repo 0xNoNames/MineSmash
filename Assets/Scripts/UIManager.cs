@@ -23,9 +23,7 @@ public class UIManager : MonoBehaviour
             _instance = this;
 
         foreach (PlayerCanvas playerUI in playerCanvasList)
-        {
             playerUI.gameObject.SetActive(false);
-        }
     }
 
     public PlayerCanvas getPlayerUI(int p)
