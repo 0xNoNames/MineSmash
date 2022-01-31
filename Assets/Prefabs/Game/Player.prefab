@@ -202,7 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 2243076222259932716}
-  playerController: {fileID: 2243076222259932717}
   animator: {fileID: 2243076222259932719}
   bumpSystem: {fileID: 466188639285774558}
   source: {fileID: 2243076222259932715}
@@ -211,6 +210,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 96090003c54210c4c957371624e28b62, type: 3}
   - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
   - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
+  maxPercentage: 999.9
+  playerController: {fileID: 2243076222259932717}
   playerID: 0
   playerName: 
   playerSpawn: {x: 0, y: 0}
@@ -219,6 +220,7 @@ MonoBehaviour:
   currentHealth: 0
   currentPercentage: 0
   isInvicible: 0
+  isDead: 0
 --- !u!114 &2243076222259932717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +241,7 @@ MonoBehaviour:
   rigidBody: {fileID: 2243076222259932716}
   spriteRenderer: {fileID: 2243076222259932706}
   bumpSystem: {fileID: 466188639285774558}
+  dummyPrefab: {fileID: 6945424006216864573, guid: 002ac192776f58347b7c4e80d53fe6df, type: 3}
   moveSpeed: 350
   jumpHeight: 25
   secondJumpRatio: 0.9
@@ -513,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf50a2c37019349800f8ab7ed1e452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bump: {x: 0, y: 0}
+  value: {x: 0, y: 0}
 --- !u!1 &2243076223651030916
 GameObject:
   m_ObjectHideFlags: 0

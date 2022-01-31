@@ -73,8 +73,8 @@ public class PlayerDetails : MonoBehaviour
 
         RemoveArrows();
 
-        UIManager.Instance.getPlayerUI(playerID).SetHealth(currentHealth);
-        UIManager.Instance.getPlayerUI(playerID).SetPercentage(0f);
+        UIManager.Instance.GetPlayerUI(playerID).SetHealth(currentHealth);
+        UIManager.Instance.GetPlayerUI(playerID).SetPercentage(0f);
 
         // Réinitialisation de la variable de bump
         bumpSystem.value = Vector2.zero;
@@ -104,7 +104,7 @@ public class PlayerDetails : MonoBehaviour
         if (currentPercentage > maxPercentage)
             currentPercentage = maxPercentage;
 
-        UIManager.Instance.getPlayerUI(playerID).SetPercentage(currentPercentage);
+        UIManager.Instance.GetPlayerUI(playerID).SetPercentage(currentPercentage);
     }
 
     private IEnumerator DamagedStun(float seconds)

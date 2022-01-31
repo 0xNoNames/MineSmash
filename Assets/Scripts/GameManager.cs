@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public List<PlayerDetails> playerList = new List<PlayerDetails>();
 
+    public GameObject dummy;
+
     private static GameManager _instance;
 
     public static GameManager Instance
@@ -49,13 +51,13 @@ public class GameManager : MonoBehaviour
         {
             player.playerController.SetDesactivateState(true);
 
-            UIManager.Instance.getPlayerUI(player.playerID).SetPercentage(0f);
-            UIManager.Instance.getPlayerUI(player.playerID).SetHealth(player.maxHealth);
+            UIManager.Instance.GetPlayerUI(player.playerID).SetPercentage(0f);
+            UIManager.Instance.GetPlayerUI(player.playerID).SetHealth(player.maxHealth);
 
             if (player.currentHealth > 0)
             {
                 player.wins += 1;
-                UIManager.Instance.getPlayerUI(player.playerID).SetWin(player.wins);
+                UIManager.Instance.GetPlayerUI(player.playerID).SetWin(player.wins);
             }
 
             player.ResetPlayer();

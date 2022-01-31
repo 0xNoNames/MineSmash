@@ -63,7 +63,7 @@ public class ArrowDetails : MonoBehaviour
 
                 // Plante la fl�che dans le dummy
                 transform.parent = hitInfo.transform;
-                //touchedDummy.Hit(rigidBody.velocity);
+                touchedDummy.Hit(rigidBody.velocity);
             }
         }
     }

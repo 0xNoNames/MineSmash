@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 6945424006216864568}
   - component: {fileID: 6945424006216864575}
   - component: {fileID: 6945424006216864574}
-  - component: {fileID: 6945424006216864566}
+  - component: {fileID: 2352324910722087064}
+  - component: {fileID: 4292711409136373420}
   m_Layer: 6
   m_Name: Dummy
   m_TagString: Dummy
@@ -31,7 +32,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6945424006216864573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92, y: 0.14, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -199,7 +200,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 6
+  m_GravityScale: 8
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -276,7 +277,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6945424006216864566
+--- !u!114 &2352324910722087064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6945424006216864573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdf50a2c37019349800f8ab7ed1e452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: {x: 0, y: 0}
+--- !u!114 &4292711409136373420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,14 +302,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012497e29bed8f04fb4c24e8c50d98d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidBody: {fileID: 6945424006216864569}
   animator: {fileID: 6945424006216864574}
-  currentPercentageUI: {fileID: 0}
+  bumpSystem: {fileID: 2352324910722087064}
   source: {fileID: 6945424006216864571}
   hitClips:
   - {fileID: 8300000, guid: 8a107cf1f365fd440b9e9a14967a021c, type: 3}
   - {fileID: 8300000, guid: 96090003c54210c4c957371624e28b62, type: 3}
   - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
   - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
-  startPos: {x: 0, y: 0}
-  isInvicible: 0
+  - {fileID: 8300000, guid: 3557e9d57e3c97d40baac03a2f4fab5d, type: 3}
+  - {fileID: 8300000, guid: 8f0fa01e42814e5469762739b97e86c3, type: 3}
+  maxPercentage: 999.9
+  dummyID: 0
+  dummyName: Dummy 1
+  dummySpawn: {x: 0, y: 0}
   currentPercentage: 0
+  isInvicible: 0

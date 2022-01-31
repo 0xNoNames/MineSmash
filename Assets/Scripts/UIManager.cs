@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public List<PlayerCanvas> playerCanvasList = new List<PlayerCanvas>();
+    public List<DummyCanvas> dummyCanvasList = new List<DummyCanvas>();
+
     private static UIManager _instance;
 
     public static UIManager Instance
@@ -21,13 +23,15 @@ public class UIManager : MonoBehaviour
             Destroy(this.gameObject);
         else
             _instance = this;
-
-        foreach (PlayerCanvas playerUI in playerCanvasList)
-            playerUI.gameObject.SetActive(false);
     }
 
-    public PlayerCanvas getPlayerUI(int p)
+    public PlayerCanvas GetPlayerUI(int p)
     {
         return playerCanvasList[p];
+    }
+
+    public DummyCanvas GetDummyUI(int p)
+    {
+        return dummyCanvasList[p];
     }
 }

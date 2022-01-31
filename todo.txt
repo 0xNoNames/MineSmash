@@ -1,6 +1,8 @@
 - Fix le déplacement lors du respawn (si le joueur reste appuyé sur gauche ou droit en mourrant il se déplace après)
 - Fix le bump en Y
 
+- Rajouter si la tête tape lors du bump -> reverse le bump 
+
 - Courbe de charge exponentielle
 
 - Custom hit sound (selon le personnage / secret)

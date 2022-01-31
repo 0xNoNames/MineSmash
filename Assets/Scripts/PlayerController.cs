@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BumpSystem bumpSystem;
 
+    [SerializeField] private GameObject dummyPrefab;
+
     [SerializeField] private float moveSpeed = 300f;
     [SerializeField] private float jumpHeight = 20f;
     [SerializeField] private float secondJumpRatio = 0.75f;
@@ -45,6 +47,9 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(bumpSystem.value.x) > 0)
             horizontalVelocity /= 2;
 
+        if (Mathf.Abs(bumpSystem.value.y) > 0)
+            verticalVelocity /= 2;
+
         rigidBody.velocity = new Vector2(horizontalVelocity + bumpSystem.value.x, rigidBody.velocity.y + bumpSystem.value.y);
 
         if (Mathf.Abs(bumpSystem.value.y) > 0)
@@ -53,13 +58,32 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(bumpSystem.value.x) - Mathf.Abs(horizontalVelocity) <= 0)
             bumpSystem.value.x = 0;
 
+        if (Mathf.Abs(bumpSystem.value.y) - Mathf.Abs(verticalVelocity) <= 0)
+            bumpSystem.value.y = 0;
+
         Flip(rigidBody.velocity.x);
     }
 
     public void Debug(InputAction.CallbackContext _keyInput)
     {
         if (_keyInput.performed)
-            bumpSystem.value = new Vector2(0, 20f);
+        {
+            if (GameManager.Instance.dummy != null)
+            {
+                DummyDetails DD = GameManager.Instance.dummy.GetComponent<DummyDetails>();
+                DD.currentPercentage += 5;
+                UIManager.Instance.GetDummyUI(DD.dummyID).SetPercentage(DD.currentPercentage);
+            }
+            else
+            {
+                GameManager.Instance.dummy = Instantiate(dummyPrefab);
+                DummyDetails dummyDetails = dummyPrefab.GetComponent<DummyDetails>();
+                dummyDetails.Initialize(0, Vector2.zero);
+
+                UIManager.Instance.GetDummyUI(dummyDetails.dummyID).gameObject.SetActive(true);
+                UIManager.Instance.GetDummyUI(dummyDetails.dummyID).SetDummyName(dummyDetails.dummyName);
+            }
+        }
     }
 
     public void Move(InputAction.CallbackContext _keyInput)
