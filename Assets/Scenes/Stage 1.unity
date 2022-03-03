@@ -2150,7 +2150,7 @@ MonoBehaviour:
         m_Flags: 0
       - m_Name: 
         m_Id: ce79e499-8d44-4fbe-8e60-91a8ea4ea635
-        m_Path: <Gamepad>/start
+        m_Path: <Gamepad>/buttonSouth
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -3240,6 +3240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerList: []
+  dummy: {fileID: 0}
 --- !u!4 &1935293866
 Transform:
   m_ObjectHideFlags: 0

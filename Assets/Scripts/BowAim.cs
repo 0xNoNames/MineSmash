@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class BowAim : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Rigidbody2D playerRB;
+    [SerializeField] private Transform playerTF;
 
     private Camera cam;
     private float distance = 0.75f;
@@ -22,7 +22,7 @@ public class BowAim : MonoBehaviour
         else
             isUsingMouse = false;
 
-        sprite.transform.position = new Vector2(playerRB.position.x + distance, playerRB.position.y);
+        sprite.transform.position = new Vector2(playerTF.position.x + distance, playerTF.position.y);
         sprite.transform.eulerAngles = new Vector3(0, 0, -90f);
     }
 
@@ -31,11 +31,11 @@ public class BowAim : MonoBehaviour
         Vector2 fixedInput = inputVector;
 
         if (isUsingMouse)
-            fixedInput = (Vector2)cam.ScreenToWorldPoint(inputVector) - playerRB.position;
+            fixedInput = cam.ScreenToWorldPoint(inputVector) - playerTF.position;
 
         float angle = Mathf.Atan2(fixedInput.y, fixedInput.x);
 
-        sprite.transform.position = new Vector2(playerRB.position.x + Mathf.Cos(angle) * distance, playerRB.position.y + Mathf.Sin(angle) * distance);
+        sprite.transform.position = new Vector2(playerTF.position.x + Mathf.Cos(angle) * distance, playerTF.position.y + Mathf.Sin(angle) * distance);
         sprite.transform.eulerAngles = new Vector3(0, 0, angle * Mathf.Rad2Deg - 90f);
     }
 

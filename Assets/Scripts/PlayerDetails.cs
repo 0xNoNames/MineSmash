@@ -73,6 +73,8 @@ public class PlayerDetails : MonoBehaviour
 
         RemoveArrows();
 
+        currentPercentage = 0f;
+
         UIManager.Instance.GetPlayerUI(playerID).SetHealth(currentHealth);
         UIManager.Instance.GetPlayerUI(playerID).SetPercentage(0f);
 
@@ -96,8 +98,8 @@ public class PlayerDetails : MonoBehaviour
         bumpSystem.value = arrowDamage;
 
         // Etourdi le joueur pendant x secondes selon son pourcentage et les dégâts de la flèche
-        StopCoroutine("DamagedStun");
-        StartCoroutine(DamagedStun(arrowDamage.magnitude / 500));
+        //StopCoroutine("DamagedStun");
+        //StartCoroutine(DamagedStun(arrowDamage.magnitude / 500));
 
         currentPercentage += arrowVelocity.magnitude * 0.37f;
 
@@ -151,5 +153,6 @@ public class PlayerDetails : MonoBehaviour
         transform.position = playerSpawn;
         currentHealth = maxHealth;
         rigidBody.velocity = Vector2.zero;
+        currentPercentage = 0f;
     }
 }

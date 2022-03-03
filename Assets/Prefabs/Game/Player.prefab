@@ -209,7 +209,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8a107cf1f365fd440b9e9a14967a021c, type: 3}
   - {fileID: 8300000, guid: 96090003c54210c4c957371624e28b62, type: 3}
   - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
-  - {fileID: 8300000, guid: b97cc1b6eec914f4ba24efafc3eb60f5, type: 3}
+  - {fileID: 8300000, guid: a947b6f77b0af1b41a7e3f6b9234a41f, type: 3}
   maxPercentage: 999.9
   playerController: {fileID: 2243076222259932717}
   playerID: 0
@@ -614,7 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 2243076223651030912}
-  playerRB: {fileID: 2243076222259932716}
+  playerTF: {fileID: 2243076222259932707}
+  distance: 5
 --- !u!95 &2243076223651030919
 Animator:
   serializedVersion: 3
